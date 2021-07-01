@@ -1,0 +1,144 @@
+.energy {
+    border: 1px solid #EDE9F9;
+    display: inline-flex;
+    border-radius: 20px;
+    padding: 0.5% 6%;
+    cursor: pointer;
+}
+
+.energyViolet {
+    border: 1px solid #EDE9F9;
+    display: inline-flex;
+    border-radius: 20px;
+    padding: 0.5% 6%;
+    color: white;
+    cursor: pointer;
+    background-color: #7F6CFC;
+}
+
+.energyContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.imageEnergy {
+    margin-right: 10%;
+}
+
+.amountNeeded {
+    display: flex;
+    margin-bottom: 10%;
+}
+
+.postProjectContainer {
+    max-width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputAmount {
+    border: 1px solid #EAE8F3;
+    display: inline-flex;
+    border-radius: 20px;
+    padding: 2% 1%;
+    width: 30%;
+    font-family: Poppins-Bold, sans-serif;
+}
+
+.amountNeeded input:focus {
+    outline: none;
+}
+
+.amountNeeded input::placeholder {
+    font-family: Poppins-Regular, sans-serif;
+    font-size: 14px;
+    color: #AE9ABA;
+}
+
+.amountNeeded input {
+    border: none;
+    border-radius: 20px;
+    width: 46%;
+}
+
+.amountNeeded input::placeholder {
+  font-size: 18px;
+    font-family: Poppins-Bold, sans-serif;
+    color: black;
+}
+
+.amountNeededText {
+    font-family: Poppins-Bold, sans-serif;
+    margin-top: 2%;
+    margin-right: 3%;
+}
+
+.energyText {
+    margin-bottom: 5%;
+}
+
+.amountNeededContainer {
+    width: 46%;
+
+}
+
+.projectDetails {
+    width: 46%;
+    border-radius: 20px;
+}
+
+.projectDetails3 {
+    width: 46%;
+    border-radius: 20px;
+    border: 1px solid #EBE1F1;
+}
+
+.projectTitle {
+    margin-bottom: 5%;
+}
+
+#sendProject {
+    width: 30%;
+    margin: 5% auto;
+    padding: 1% 1%
+}
+
+.comebacksoon {
+    text-align: center;
+    margin-top: 4%;
+}
+
+#availableProjects {
+    margin: 5% auto;
+    width: 30%;
+    padding: 1% 1%;
+
+}
+
+.imgContainerThankYou {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.placeholderContainer2 input{
+    outline: none;
+    border: none;
+    width: 90%;
+}
+
+.placeholderContainer2 {
+    border: 1px solid #EBE1F1;
+    border-radius: 20px;
+    padding: 2% 2%;
+    margin-bottom: 3%;
+}
+
+#suivantButton {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.suivantContainerPost {
+    width: 100%;
+}

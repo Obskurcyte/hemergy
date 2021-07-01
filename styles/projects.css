@@ -1,0 +1,97 @@
+.energyListItem {
+    display: flex;
+}
+
+.projectsListContainer {
+    width: 45%;
+}
+
+.projectsFullContainer {
+    display: flex;
+    max-width: 80%;
+    margin: 3% auto;
+}
+
+.energyAndProductionChose {
+    display: flex;
+    justify-content: space-around;
+}
+
+.energyChose {
+    width: 45%;
+}
+
+.productionChose {
+    width: 45%;
+}
+
+.MuiTypography-gutterBottom {
+    font-family: Poppins-Regular, sans-serif!important;
+    color: #826F89!important;
+}
+
+.productionValue {
+    font-family: Poppins-Bold, sans-serif;
+}
+
+.MuiSlider-rail {
+    height: 4px !important;
+}
+
+.MuiSlider-thumb {
+    width: 25px!important;
+    height: 25px!important;
+    margin-top: -10px!important;
+}
+
+.energyTypeText {
+    margin-bottom: 5% !important;
+}
+
+.productionChoseContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.projectsFound {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15%;
+}
+
+.sortBy {
+    display: flex;
+    width: 35%;
+}
+
+.foundProjects {
+    width: 45%;
+    font-family: Poppins-Bold, sans-serif;
+}
+
+.sortByText {
+    width: 700%;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+
+.projectsList {
+    margin-top: 10%;
+}
+
+.carteContainer {
+    width: 45%;
+    margin-top: 15%;
+    margin-left: 3%;
+}
+
+.search {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+}

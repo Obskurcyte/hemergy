@@ -1,0 +1,107 @@
+.checkoutContainer {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.stepContainer{
+    width: 60%;
+}
+.stepContainer2{
+    width: 76%;
+}
+.leftLayout {
+    border-left: 10px dotted purple;
+    height: 100%;
+}
+
+.checkoutInnerTitle {
+    color: #A693B2;
+    font-size: 25px;
+}
+
+.contributionAndEstimated {
+    display: flex;
+    justify-content: space-around;
+}
+
+.contributionAndEstimated p {
+    font-family: Poppins-Bold, sans-serif;
+    text-align: center;
+}
+
+.levelAndEarning {
+    display: flex;
+    justify-content: space-between;
+}
+
+.innerContainer2 {
+    display: flex;
+}
+
+.purpleTitle {
+    color: #7F6CFC;
+    font-family: Poppins-SemiBold, sans-serif;
+}
+
+.creditCardInput {
+    border: 1px solid #EBE1F1;
+    width: 100%;
+    border-radius: 13px;
+    margin-top: 2%;
+}
+
+.creditCardInputMini {
+    border: 1px solid #EBE1F1;
+    width: 45%;
+    border-radius: 13px;
+    margin-top: 2%;
+}
+
+.img-form {
+    height: 100%;
+    margin-top: 2%;
+}
+
+.img-form-mini {
+    height: 50%;
+    margin-top: 4%;
+}
+
+.img-checkout {
+    height: 100%;
+    margin-top: 1.3%;
+    margin-right: 4%;
+}
+.checkoutForm {
+    max-width: 70%;
+}
+
+.inputCheckout {
+    border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.inputCheckout:focus {
+    outline: none;
+}
+
+.inputCheckout::placeholder {
+    font-family: Poppins-Regular, sans-serif;
+    color: #AE9ABA;
+}
+
+.expiry-container {
+    width: 100%;
+}
+
+#pay-button {
+    width: 45%;
+}
+
+#back-button {
+    width: 45%;
+}

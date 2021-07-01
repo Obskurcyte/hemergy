@@ -1,0 +1,41 @@
+.consommationAndEnergyContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectCardContainer {
+    display: flex;
+    border: 1px solid #EAE8F3;
+    border-radius: 10px;
+    margin-top: 3%;
+}
+
+.projectCard {
+    padding-left: 4%;
+    padding-top: 3%;
+}
+.locationContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+.consommationContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.energyContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5%;
+}
+
+#contribute {
+    border-radius: 15px;
+}

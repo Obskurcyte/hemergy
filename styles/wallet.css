@@ -1,0 +1,20 @@
+.recapContainer {
+    width: 40%;
+}
+
+.recapContainer p {
+    color: #826F89
+}
+
+
+.recapContainer h5 {
+    font-family: Poppins-Bold, sans-serif;
+}
+
+.imgCarte {
+    height: 60%;
+}
+
+.mapContainer {
+    width: 55%;
+}

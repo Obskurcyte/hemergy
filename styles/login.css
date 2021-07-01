@@ -1,0 +1,106 @@
+.headTitleLog {
+    text-align: center;
+    margin-top: 3%;
+}
+
+.loginContainer {
+    align-items: center;
+}
+.loginContainer input {
+    border: none;
+    border-radius: 20px;
+    width: 90%;
+}
+
+.emailInput {
+    margin: 1% auto;
+    width: 30%;
+    padding: 1% 1%;
+}
+
+.loginContainer input:focus {
+    outline: none;
+}
+
+.loginContainer input::placeholder {
+    font-family: Poppins-Regular, sans-serif;
+    font-size: 14px;
+    color: #AE9ABA;
+}
+
+.emailInput {
+    border: 1px solid #EBE1F1;
+    border-radius: 20px;
+}
+
+#loginButton {
+    width: 30%;
+    margin: 0 auto;
+    padding: 1% 1%;
+}
+
+.hrContainer {
+    display: flex;
+    width: 30%;
+    margin: 2% auto;
+}
+
+.hrContainer hr {
+    width: 30%;
+    margin-bottom: 1%;
+    border-top: 1px solid #78889F;
+}
+
+.oauthContainer {
+    width: 30%;
+    display: flex;
+    margin: 2% auto;
+    justify-content: space-between;
+}
+
+.oauthInnerContainer {
+    display: flex;
+    width: 47%;
+    align-items: center;
+    padding: 2% 5%;
+    border: 1px solid #EBE1F1;
+    border-radius: 20px;
+}
+
+.oauthText {
+    text-align: center;
+    margin-left: 6%;
+}
+
+.goToSignup {
+    color: #7F6CFC;
+}
+
+.goToSignupContainer {
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.signUpContainer {
+    display: flex;
+    margin: 2% auto;
+    width: 18%;
+}
+
+.leaveBlanck {
+    height: 120px
+}
+
+.conditions {
+    display: flex;
+    width: 20%;
+    margin: 1% auto;
+}
+
+.acceptText {
+    margin-top: 3%;
+}
+
+.imgConnection {
+    margin-right: 2%;
+}

@@ -1,0 +1,19 @@
+.navLinks {
+    color: #7F6CFC!important;
+    width: 35% !important;
+    margin-top: 0.8%;
+}
+
+.buttonContainer{
+    background-color: white;
+    border-radius: 20px;
+    padding: 2% 1%;
+    border: 2px solid #7F6CFC;
+}
+
+
+.buttonText {
+    color: #7F6CFC;
+    text-align: center;
+    padding: 4%;
+}

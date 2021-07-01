@@ -1,0 +1,13 @@
+.buttonContainer {
+    background-color: #7F6CFC;
+    border-radius: 20px;
+    padding: 2% 5%;
+    width: 40%;
+    cursor: pointer;
+}
+
+
+.buttonText {
+    color: white;
+    text-align: center;
+}

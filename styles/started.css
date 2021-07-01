@@ -1,0 +1,46 @@
+.contribution {
+    width: 15%;
+    position: absolute;
+    top: -15%;
+    left: 42%;
+}
+
+.contributors {
+    width: 45%;
+    border: 1px solid #EAE8F3;
+    padding: 5%;
+    position: relative;
+    text-align: center;
+}
+
+.holdProject {
+    color: #826F89;
+    margin-top: 4%;
+}
+
+.startContainer p {
+    margin-right: 5%;
+}
+.startContainer {
+    text-align: center;
+    margin-top: 10%;
+    margin-left: 40%;
+    cursor: pointer;
+}
+
+.greenStartContainer {
+    margin-left: 40%;
+
+}
+.projectHolders {
+    width: 45%;
+    border: 1px solid #EAE8F3;
+    padding: 5%;
+    position: relative;
+    text-align: center;
+}
+
+.startedContainer {
+    width: 40%;
+    margin: 10% auto;
+}

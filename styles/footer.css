@@ -1,0 +1,36 @@
+.footerContainer {
+    background-color: #342497;
+    padding-bottom: 2%;
+}
+
+.footerContainer hr {
+    border-top: 1px solid white;
+    width: 100%;
+}
+.footerInnerContainer {
+    color: white;
+    display: flex;
+    padding: 2% 5%;
+    justify-content: space-around;
+}
+
+.imgFooter {
+    height: 60%;
+}
+
+.emailFooter {
+    margin-right: 8%;
+}
+
+.colFooter p, .colFooter img{
+    margin-top: 3%;
+}
+
+.followContainer img{
+    margin-left: 6%;
+}
+
+.copyright {
+    text-align: center;
+    color: white;
+}

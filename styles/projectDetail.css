@@ -1,0 +1,126 @@
+.goBackContainer {
+    display: flex;
+    cursor: pointer;
+    height: 50%;
+    margin-top: 1.5%;
+}
+
+.backText {
+    color: #7F6CFC;
+}
+
+.ProjectDetailsAndMap {
+    display: flex;
+    margin-top: 5%;
+}
+
+.projectDetailsInner {
+    width: 45%;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.productDetailContainer {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-bottom: 5%   ;
+}
+
+.line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3%;
+}
+
+.energyTypeContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.projectImg {
+    width: 100%;
+}
+
+.lowTitle {
+    font-size: 18px;
+}
+
+.projectDetailsTitle {
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.projectDetailTitleContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 56%;
+    margin-top: 3%;
+}
+
+.projectDetailTitle {
+    text-align: center;
+}
+
+.contributors {
+    display: flex;
+    justify-content: space-between;
+}
+
+.numberContributors {
+    display: flex;
+}
+
+.amount {
+    font-family: Poppins-Bold, sans-serif;
+}
+
+.contributionAndGraph {
+    display: flex;
+    margin-top: 5%;
+}
+
+.contributionContainer {
+    width: 50%;
+}
+
+.setAmount {
+    font-family: Poppins-bold, sans-serif!important;
+    color: black!important;
+    margin-top: 2% !important;
+}
+
+.contributionChoseContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputAmount2 {
+    border: 1px solid #EAE8F3;
+    display: inline-flex;
+    border-radius: 20px;
+    padding: 2% 1%;
+    /* width: 0%; */
+    font-family: Poppins-Bold, sans-serif;
+}
+
+.estimatedInnerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.estimatedResults {
+    margin-top: 5%;
+}
+
+#contributeButton {
+    width: 100%;
+    margin-top: 3%;
+}
+
+.productMap {
+    width: 45%;
+    margin-left: 5%;
+}
