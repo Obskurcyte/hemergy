@@ -1,13 +1,13 @@
 import React from 'react';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Slider from "@material-ui/core/Slider";
-import PurpleButton from "../components/PurpleButton";
-import Map from "../components/Map";
-import Footer from "../components/Footer";
+import PurpleButton from "../../components/PurpleButton";
+import Map from "../../components/Map";
+import Footer from "../../components/Footer";
 
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -142,29 +142,29 @@ const ProjectDetail = () => {
                 <div className="contributionAndGraph">
                     <div className="contributionContainer">
                         <h2>Your contribution</h2>
-                            <div className={classes.root}>
-                                <div className="contributionChoseContainer">
-                                    <Typography id="input-slider" gutterBottom className="setAmount">
-                                        Set amount
-                                    </Typography>
-                                    <div className="inputAmount2">
-                                        <img src={'/Wallet.png'} alt=""/>
-                                        <p className='productionValue'>{value} €</p>
-                                    </div>
-
+                        <div className={classes.root}>
+                            <div className="contributionChoseContainer">
+                                <Typography id="input-slider" gutterBottom className="setAmount">
+                                    Set amount
+                                </Typography>
+                                <div className="inputAmount2">
+                                    <img src={'/Wallet.png'} alt=""/>
+                                    <p className='productionValue'>{value} €</p>
                                 </div>
-                                <Grid container spacing={2} alignItems="center">
-                                    <Grid item xs>
-                                        <Slider
-                                            value={typeof value === 'number' ? value : 0}
-                                            onChange={handleSliderChange}
-                                            aria-labelledby="input-slider"
-                                            min={0}
-                                            style={{color: '#7F6CFC'}}
-                                            max={100000}
-                                        />
-                                    </Grid>
+
+                            </div>
+                            <Grid container spacing={2} alignItems="center">
+                                <Grid item xs>
+                                    <Slider
+                                        value={typeof value === 'number' ? value : 0}
+                                        onChange={handleSliderChange}
+                                        aria-labelledby="input-slider"
+                                        min={0}
+                                        style={{color: '#7F6CFC'}}
+                                        max={100000}
+                                    />
                                 </Grid>
+                            </Grid>
                         </div>
 
                         <div className="estimatedResults">
@@ -191,7 +191,7 @@ const ProjectDetail = () => {
                     </div>
                 </div>
             </div>
-        <Footer />
+            <Footer />
         </div>
     );
 };
