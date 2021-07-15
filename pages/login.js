@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import Header from "../components/Header";
 import PurpleButton from "../components/PurpleButton";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import {Formik} from "formik";
-import {signIn} from "next-auth/client";
 import {useRouter} from "next/router";
+import axios from "axios";
+import {AuthContext} from "../context/auth";
 
 const Login = () => {
 
-
+    const auth = useContext(AuthContext)
     const router = useRouter();
 
     const initialValues = {
         password: '',
         email: ''
     }
+
+    const [error, setErrors] = useState('')
 
     return (
         <div className='loginContainer'>
@@ -25,13 +28,23 @@ const Login = () => {
             <Formik
                 initialValues={initialValues}
                 onSubmit={async values => {
-                    const result = await signIn('credentials', {
-                        redirect: false,
-                        email: values.email,
-                        password: values.password
-                    })
-                    await router.push('/wallet')
-                    console.log(result)
+                    try {
+                        console.log('wola')
+                        const response = await axios.post('/api/auth/login', {
+                            headers: {
+                                Accept: 'application/json, text/plain, */*',
+                                'User-Agent': '*',
+                            },
+                            email: values.email,
+                            password: values.password
+                        })
+                        auth.login(response.data.name, response.data.token)
+                        await router.push('/wallet')
+                        console.log(response)
+                    } catch (err) {
+                        console.log(err)
+                }
+
                 }}
             >
                 {props => (

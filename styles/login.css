@@ -72,6 +72,10 @@
     margin-left: 6%;
 }
 
+.oauthInnerContainer {
+    cursor: pointer;
+}
+
 .goToSignup {
     color: #7F6CFC;
 }

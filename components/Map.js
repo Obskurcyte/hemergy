@@ -5,12 +5,11 @@ import {
     Marker,
     InfoWindow
 } from "@react-google-maps/api";
-
-import {formatRelative} from 'date-fns';
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from "use-places-autocomplete";
+
 import {
     Combobox,
     ComboboxInput,
@@ -18,6 +17,7 @@ import {
     ComboboxList,
     ComboboxOption
 } from "@reach/combobox";
+
 import mapStyles from "../mapStyles";
 
 const libraries = ["places"];
@@ -37,16 +37,32 @@ const options = {
     zoomControl: true
 }
 
-const Map = () => {
+
+
+const Map = ({projects}) => {
+
 
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.maps,
         libraries
     });
 
-    const [markers, setMarkers] = useState([])
 
-    const onMapClick = useCallback((e) => {
+    let markers = [{}]
+    for (let data in projects) {
+       markers.push({
+           lat: projects[data].lat,
+           lng: projects[data].lng
+       })
+    }
+
+
+
+
+
+    console.log('markers', markers)
+
+   /* const onMapClick = useCallback((e) => {
         setMarkers(current => [
                 ...current,
                 {
@@ -58,6 +74,9 @@ const Map = () => {
         )
     }, [])
 
+    */
+
+    console.log('markers', markers)
     const mapRef = useRef();
     const onMapLoad = useCallback((map) => {
         mapRef.current = map
@@ -73,28 +92,32 @@ const Map = () => {
     if (!isLoaded) return "Loading Map"
 
     return (
-        <div>
+        <div className="mapSuperContainer">
             <Search panTo={panTo}/>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={3}
                 center={center}
                 options={options}
-                onClick={onMapClick}
                 onLoad={onMapLoad}
             >
-                {markers.map(marker => (
-                    <Marker
-                        key={marker.time.toISOString()}
-                        position={{lat: marker.lat, lng: marker.lng}}
-                        icon={{
-                            url: '/mapMarker.png',
-                            scaledSize: new window.google.maps.Size(30,30),
-                            origin: new window.google.maps.Point(0,0),
-                            anchor: new window.google.maps.Point(15, 15)
-                        }}
-                    />
-                ))}
+                {markers.map(marker => {
+                    console.log(marker.lat)
+                    console.log(marker.lng)
+                    return (
+                        <Marker
+                            /*key={marker.lng.toISOString()}*/
+                            position={{lat: marker.lat, lng: marker.lng}}
+                            icon={{
+                                url: '/mapMarker.png',
+                                scaledSize: new window.google.maps.Size(30,30),
+                                origin: new window.google.maps.Point(0,0),
+                                anchor: new window.google.maps.Point(15, 15)
+                            }}
+                        />
+                    )
+                }
+                )}
             </GoogleMap>
         </div>
     );
@@ -116,28 +139,37 @@ const Search = ({panTo}) => {
         <Combobox onSelect={async (address) => {
             setValue(address, false);
             clearSuggestions();
+
             try {
                 const results = await getGeocode({address})
                 const {lat, lng} = await getLatLng(results[0]);
+                console.log(lat)
+                console.log(lng)
                 panTo({lat, lng})
             } catch(err) {
                 console.log(err)
             }
 
-
-        }}>
+        }}
+        >
             <ComboboxInput
                 value={value}
                 onChange={(e) => {
                     setValue(e.target.value)
                 }}
+                style={{width: '100%'}}
                 disabled={!ready}
                 placeholder="Enter an adress"
             />
-            <ComboboxPopover>
-                {status === 'OK' && data.map(({id, description}) => (
-                    <ComboboxOption key={id} value={description}/>
-                ))}
+            <ComboboxPopover
+                style={{backgroundColor: 'white', paddingLeft: '1%'}}
+            >
+                {status === 'OK' && data.map(({id, description}) => {
+                    return (
+                        <ComboboxOption key={id} value={description}/>
+                    )
+                }
+                )}
             </ComboboxPopover>
         </Combobox>
         </div>

@@ -9,23 +9,20 @@
     width: 30% !important;
 }
 .expandNav {
-    width: 85% !important;
+    width:  100% !important;
 }
 
 .logoContainer {
-    margin-left: 8%;
+    margin-left: 1%;
     margin-right: 5% !important;
 }
 .buttonContainer {
-    width: 70%;
+    width: 90%;
     display: flex;
     justify-content: space-around;
     margin: 3% auto;
 }
 
-.headTitle {
-    width: 100%;
-}
 
 .imgAccueil {
     width: 100%;
@@ -64,6 +61,8 @@
     height: 450px;
     position: relative;
     margin: auto;
+    overflow: hidden;
+    border-radius: 50px;
 }
 
 .contributorInner {
@@ -337,3 +336,98 @@
     margin-top: 3%;
 }
 
+@media screen and (max-width: 1325px){
+    .headTitle {
+        max-width: 70%;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .howItWorks h4 {
+        max-width: 70%;
+        text-align: center;
+        margin: 2% auto;
+    }
+    .video {
+        width: 90%;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 40px;
+    }
+    .contributorInner, .ecosystemInner{
+        flex-direction: column;
+    }
+    .contributorInner2, .ecosystemInner2 {
+        flex-direction: column-reverse;
+    }
+    .innerEolienneContainer {
+        margin-left: 0;
+        margin-bottom: 10%;
+    }
+    .imgEolienne {
+        width: 60%;
+        margin: 0 auto;
+    }
+    .contactContainer {
+        padding: 4% 9%;
+    }
+    .ecosystemMini {
+        width: 100%;
+        margin-bottom: 10%;
+    }
+    .ecosystemMini2 {
+        width: 100%;
+        margin-bottom: 10%;
+        margin-left: 0;
+    }
+    #apiButton {
+        width: 60%;
+        margin: 0 auto;
+    }
+    .reasonContainer {
+        padding: 5% 5%;
+    }
+    .buttonContainer {
+        width: 100%;
+    }
+    .headTitle {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 760px){
+    .headTitle h3 {
+        font-size: 1.3rem;
+    }
+    .headTitle {
+        max-width: 90%;
+    }
+    .mainTitle {
+        font-size: 50px ;
+    }
+    .buttonContainer {
+        flex-direction: column;
+        margin: 2% auto;
+        align-items: center;
+    }
+    #learnMore {
+        margin-bottom: 2%;
+        width: 60%;
+        display: inline-block;
+    }
+    #indexAvailable {
+        display: inline-block;
+        width: 60%;
+    }
+    .howItWorks p {
+        max-width: 70%;
+        margin: 0 auto;
+    }
+    .flexContainer {
+        flex-direction: column;
+    }
+    .whyContainer {
+        width: 100%;
+        margin: 2%;
+    }
+}

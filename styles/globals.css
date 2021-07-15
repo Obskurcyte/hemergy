@@ -51,3 +51,7 @@ h1, h4, h2 {
 .bold {
   font-family: Poppins-Bold, sans-serif;
 }
+
+.flex {
+  display: flex;
+}

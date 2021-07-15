@@ -8,6 +8,7 @@ import Slider from "@material-ui/core/Slider";
 import PurpleButton from "../../components/PurpleButton";
 import Map from "../../components/Map";
 import Footer from "../../components/Footer";
+import {connectToDatabase} from "../../lib/db";
 
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -24,7 +25,7 @@ const BorderLinearProgress = withStyles((theme) => ({
     },
 }))(LinearProgress);
 
-const ProjectDetail = () => {
+const ProjectDetail = ({project}) => {
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -78,7 +79,7 @@ const ProjectDetail = () => {
                         <img src={'/goBack.png'} alt=""/>
                         <p className="backText">Back</p>
                     </div>
-                    <h1 className="projectDetailTitle">Project Paris</h1>
+                    <h1 className="projectDetailTitle">{project.title}</h1>
                 </div>
 
                 <div className="ProjectDetailsAndMap">
@@ -97,7 +98,7 @@ const ProjectDetail = () => {
                                 <img src={'/capaciteCarre.png'} alt=""/>
                                 <div className="description">
                                     <p>Capacity</p>
-                                    <h4 className="lowTitle">300MW/year</h4>
+                                    <h4 className="lowTitle">{project.consumption} MW/year</h4>
                                 </div>
                             </div>
                         </div>
@@ -114,14 +115,14 @@ const ProjectDetail = () => {
                                 <img src={'/walletCarre.png'} alt=""/>
                                 <div className="description">
                                     <p>Amount to raise</p>
-                                    <h4 className="lowTitle">230 000€</h4>
+                                    <h4 className="lowTitle">{project.amount} €</h4>
                                 </div>
                             </div>
                         </div>
 
                         <h4 className="projectDetailsTitle">Amount raised</h4>
                         <div className="contributionContainer">
-                            <div className="contributors mb-3">
+                            <div className="contributors2 mb-3">
                                 <div className="numberContributors">
                                     <img src={'/twoUsers.png'} alt=""/>
                                     <p className="amount ml-3">4 contributors</p>
@@ -140,7 +141,7 @@ const ProjectDetail = () => {
                 </div>
 
                 <div className="contributionAndGraph">
-                    <div className="contributionContainer">
+                    <div className="contributionContainer2">
                         <h2>Your contribution</h2>
                         <div className={classes.root}>
                             <div className="contributionChoseContainer">
@@ -195,5 +196,50 @@ const ProjectDetail = () => {
         </div>
     );
 };
+
+export async function getStaticProps (context) {
+
+    const {params} = context
+    const client = await connectToDatabase();
+    const db = client.db();
+
+    const projectsToBeValidated = await db
+        .collection("validatedProjects")
+        .find()
+        .toArray()
+
+    const projects = JSON.parse(JSON.stringify(projectsToBeValidated))
+
+    const project = projects.find(project => {
+        return (
+            project._id === params.id)
+    })
+
+
+    return {
+        props: {
+            project: project,
+        },
+    };
+}
+
+export async function getStaticPaths() {
+    const client = await connectToDatabase();
+    const db = client.db();
+    const project = await db
+        .collection("validatedProjects")
+        .find()
+        .toArray()
+
+    const ids = project.map(project => project._id)
+
+
+    return {
+        paths: [
+            {params: {id: 'ddjfdfdfjd'}}
+        ],
+        fallback: 'blocking'
+    }
+}
 
 export default ProjectDetail;

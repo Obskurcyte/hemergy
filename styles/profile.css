@@ -1,0 +1,31 @@
+.profileContainer2 {
+    margin-left: 15%;
+}
+
+.nameInput::placeholder {
+    font-family: Poppins-Bold, sans-serif;
+    color: black;
+}
+
+.profileContainer input {
+    width: 100%;
+}
+.img-profile {
+    margin-bottom: 1%;
+}
+
+.Miniblanck {
+    height: 100px;
+}
+.changePassword {
+    width: 50%;
+}
+
+#profileSave {
+    padding: 1% 1%;
+    width: 30%;
+}
+.profileContainer {
+    width: 300%;
+    margin: 0 auto
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -10,11 +10,13 @@ import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 import VolumeUp from '@material-ui/icons/VolumeUp';
-import ProjectCard from "../components/projectCard";
-import Footer from "../components/Footer";
-import Map from "../components/Map";
+import ProjectCard from "../../components/ProjectCard";
+import Footer from "../../components/Footer";
+import Map from "../../components/Map";
+import {connectToDatabase} from "../../lib/db";
+import ValidateProjectCard from "../../components/ValidateProjectCard";
 
-const Projects = () => {
+const Index = ({projects}) => {
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -46,6 +48,7 @@ const Projects = () => {
         setValue(newValue);
     };
 
+    console.log(projects)
     const handleInputChange = (event) => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
@@ -141,16 +144,19 @@ const Projects = () => {
                         </div>
                     </div>
 
-                    <div className="projectsList">
-                        <ProjectCard />
-                        <ProjectCard />
-                        <ProjectCard />
-                    </div>
-
+                    {projects.map(project => (
+                        <div className="projectsList">
+                            <ProjectCard
+                                link={project._id}
+                                title={project.title}
+                                consumption={project.consumption}
+                            />
+                        </div>
+                        ))}
                 </div>
 
                 <div className="carteContainer">
-                    <Map/>
+                    <Map projects={projects}/>
                 </div>
             </div>
 
@@ -159,4 +165,21 @@ const Projects = () => {
     );
 };
 
-export default Projects;
+export async function getStaticProps() {
+    const client = await connectToDatabase();
+    const db = client.db();
+
+    const projects = await db
+        .collection("validatedProjects")
+        .find()
+        .toArray()
+
+
+    return {
+        props: {
+            projects: JSON.parse(JSON.stringify(projects)),
+        },
+    };
+}
+
+export default Index;

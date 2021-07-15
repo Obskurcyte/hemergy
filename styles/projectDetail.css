@@ -64,11 +64,14 @@
     text-align: center;
 }
 
-.contributors {
+.contributors2 {
     display: flex;
     justify-content: space-between;
 }
 
+.contributionContainer2 {
+    width: 50%;
+}
 .numberContributors {
     display: flex;
 }
@@ -83,7 +86,7 @@
 }
 
 .contributionContainer {
-    width: 50%;
+    width: 100%;
 }
 
 .setAmount {

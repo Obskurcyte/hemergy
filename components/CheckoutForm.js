@@ -108,7 +108,6 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone }) => {
             }}
             onSubmit={async (values) => {
 
-
                 const cardValues = {
                     card: values.cardNumber,
                     name: values.name
@@ -132,6 +131,8 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone }) => {
                         card: cardElement,
                     });
 
+                    console.log(paymentMethodReq)
+
                     if (paymentMethodReq.error) {
                         setCheckoutError(paymentMethodReq.error.message);
                         setProcessingTo(false);
@@ -142,6 +143,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone }) => {
                         payment_method: paymentMethodReq.paymentMethod.id
                     });
 
+                    console.log(error)
                     if (error) {
                         setCheckoutError(error.message);
                         setProcessingTo(false);

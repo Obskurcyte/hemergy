@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PurpleButton from "../components/PurpleButton";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -7,14 +7,19 @@ import {Formik} from "formik";
 import axios from 'axios';
 import Link from "next/link";
 import { useRouter } from 'next/router'
+import {AuthContext} from "../context/auth";
+import {GoogleLogin} from "react-google-login";
+import {useDispatch} from 'react-redux';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
 const Signup = () => {
 
 
+    const auth = useContext(AuthContext)
     const router = useRouter()
 
     const [checked, setChecked] = React.useState(true);
-
+    const dispatch = useDispatch()
     const initialValues = {
         email: '',
         name: '',
@@ -23,6 +28,31 @@ const Signup = () => {
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
+
+    const googleSuccess = async (res) => {
+        const result = res?.profileObj;
+        const token = res?.tokenId;
+
+        try {
+            dispatch({type: 'AUTH', data: {result, token}})
+            await router.push('/started')
+        } catch(err) {
+            console.log(err)
+        }
+        console.log(res)
+    }
+
+    const googleFailure = () => {
+        console.log("Google sign in was unsuccessful... Try again later !")
+    }
+
+    const responseFacebook = async (res) => {
+        localStorage.setItem('userDataHemergy',
+            JSON.stringify({name: res.name, token: res.acessToken, email: res.email})
+        )
+        await router.push('/started')
+    }
+
     return (
         <div className='loginContainer'>
             <Header/>
@@ -31,12 +61,18 @@ const Signup = () => {
                 initialValues={initialValues}
                 onSubmit={async (values) => {
                     try {
+                        console.log(values)
                         const response = await axios.post('/api/auth/signup', {
+                            headers: {
+                                Accept: 'application/json, text/plain, */*',
+                                'User-Agent': '*',
+                            },
                             name: values.name,
                             email: values.email,
                             password: values.password
                         })
-                        await router.push('/wallet')
+                        auth.login(response.data.name, response.data.token)
+                        await router.push('/started')
                         console.log(response)
                     } catch (err) {
                         console.log(err)
@@ -98,14 +134,35 @@ const Signup = () => {
             </div>
 
             <div className="oauthContainer">
-                <div className="oauthInnerContainer">
-                    <img src={'/google.png'} alt=""/>
+
+                    {/* <img src={'/google.png'} alt=""/>
                     <p className='oauthText'>Sign up with Google</p>
-                </div>
-                <div className="oauthInnerContainer">
-                    <img src={'/facebookConnect.png'} alt=""/>
-                    <p className='oauthText'>Sign up with Facebook</p>
-                </div>
+                    */}
+                    <GoogleLogin
+                        clientId={process.env.GOOGLE_CLIENT_ID}
+                        render={(renderProps) => (
+                            <div className="oauthInnerContainer" onClick={renderProps.onClick}>
+                                <img src={'/google.png'} alt=""/>
+                                <p className='oauthText'>Sign up with Google</p>
+                            </div>
+                            )}
+                        onSuccess={googleSuccess}
+                        onFailure={googleFailure}
+                        cookiePolicy="single_host_origin"
+                    />
+                <FacebookLogin
+                    appId="356594049214338"
+                    autoLoad={true}
+                    render={(renderProps) => (
+                        <div className="oauthInnerContainer" onClick={renderProps.onClick}>
+                            <img src={'/facebookConnect.png'} alt=""/>
+                            <p className='oauthText'>Sign up with Facebook</p>
+                        </div>
+                    )}
+                    fields="name,email,picture"
+                   // onClick={componentClicked}
+                    callback={responseFacebook} />,
+
             </div>
 
             <div className="signUpContainer">

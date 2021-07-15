@@ -5,6 +5,10 @@
     padding: 0.5% 6%;
     cursor: pointer;
 }
+.energyNeeded {
+    width: 90%;
+    margin: 0 auto;
+}
 
 .energyViolet {
     border: 1px solid #EDE9F9;
@@ -27,16 +31,13 @@
 
 .amountNeeded {
     display: flex;
-    margin-bottom: 10%;
+    margin-left: 40%;
+    margin-bottom: 5%;
 }
 
-.postProjectContainer {
-    max-width: 70%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+.titleContainer {
+    align-items: center;
 }
-
 .inputAmount {
     border: 1px solid #EAE8F3;
     display: inline-flex;
@@ -79,19 +80,25 @@
 }
 
 .amountNeededContainer {
-    width: 46%;
-
+    width: 90%;
+    margin: 0 auto;
 }
 
 .projectDetails {
-    width: 46%;
+    width: 90%;
     border-radius: 20px;
+    margin: 0 auto;
 }
 
 .projectDetails3 {
-    width: 46%;
+    width: 100%;
     border-radius: 20px;
     border: 1px solid #EBE1F1;
+}
+
+.projectDetails3Container {
+    width: 90%;
+    margin: 0 auto;
 }
 
 .projectTitle {
@@ -99,9 +106,7 @@
 }
 
 #sendProject {
-    width: 30%;
-    margin: 5% auto;
-    padding: 1% 1%
+    width: 40%;
 }
 
 .comebacksoon {
@@ -127,6 +132,11 @@
     width: 90%;
 }
 
+.imgPlaceholder {
+    width: 2% !important;
+    height: 13% !important;
+}
+
 .placeholderContainer2 {
     border: 1px solid #EBE1F1;
     border-radius: 20px;
@@ -135,10 +145,26 @@
 }
 
 #suivantButton {
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
 }
 
 .suivantContainerPost {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+.blanck {
+    height: 350px;
+}
+
+.searchBarContainer {
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+#postProjectButton {
+    width: 50%;
+    margin: 5% auto;
 }

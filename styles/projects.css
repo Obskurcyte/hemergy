@@ -12,6 +12,12 @@
     margin: 3% auto;
 }
 
+.projectsAdminListContainer {
+    width: 100%;
+}
+.mapSuperContainer {
+    position: relative;
+}
 .energyAndProductionChose {
     display: flex;
     justify-content: space-around;

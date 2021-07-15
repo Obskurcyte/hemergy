@@ -1,22 +1,19 @@
 import React from 'react';
-import Header from "../components/Header";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Typography from "@material-ui/core/Typography";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Grid from "@material-ui/core/Grid";
-import Slider from "@material-ui/core/Slider";
-import ProjectCard from "../components/ProjectCard";
-import Map from "../components/Map";
-import Footer from "../components/Footer";
+import Header from "../../components/Header";
+import Map from "../../components/Map";
+import Footer from "../../components/Footer";
+import {connectToDatabase} from "../../lib/db";
+import ValidateProjectCard from "../../components/ValidateProjectCard";
 
-const Admin = () => {
+const Index = ({projectsToBeValidated}) => {
+
+    console.log(projectsToBeValidated)
+
     return (
         <div>
             <Header />
             <div className="projectsFullContainer">
-                <div className="projectsListContainer">
+                <div className="projectsAdminListContainer">
 
                     <div className="projectsFound">
                         <h3 className="foundProjects">Found 10 projects</h3>
@@ -24,17 +21,22 @@ const Admin = () => {
                         </div>
                     </div>
 
-                    <div className="projectsList">
-                        <ProjectCard />
-                        <ProjectCard />
-                        <ProjectCard />
-                    </div>
+                        {projectsToBeValidated.map((project) => (
+                            <div className="projectsList">
+                                <ValidateProjectCard
+                                    title={project.title}
+                                    consumption={project.consumption}
+                                    link={project._id}
+                                />
+                            </div>
+                            ))}
 
                 </div>
 
-                <div className="carteContainer">
+                {/*} <div className="carteContainer">
                     <Map/>
                 </div>
+                */}
             </div>
 
             <Footer />
@@ -42,4 +44,21 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+
+export async function getStaticProps() {
+    const client = await connectToDatabase();
+    const db = client.db();
+
+    const projectsToBeValidated = await db
+        .collection("projects")
+        .find()
+        .toArray()
+
+    console.log(projectsToBeValidated)
+    return {
+        props: {
+            projectsToBeValidated: JSON.parse(JSON.stringify(projectsToBeValidated)),
+        },
+    };
+}
+export default Index;

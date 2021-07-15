@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "../../components/Header";
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -8,7 +8,9 @@ import Slider from "@material-ui/core/Slider";
 import PurpleButton from "../../components/PurpleButton";
 import Map from "../../components/Map";
 import Footer from "../../components/Footer";
-
+import {connectToDatabase} from "../../lib/db";
+import {useRouter} from "next/router";
+import axios from "axios";
 
 const BorderLinearProgress = withStyles((theme) => ({
     root: {
@@ -24,7 +26,23 @@ const BorderLinearProgress = withStyles((theme) => ({
     },
 }))(LinearProgress);
 
-const ProjectDetail = () => {
+const ProjectDetail = ({projectsToBeValidated, project}) => {
+
+    const router = useRouter();
+
+ /*   const project = projectsToBeValidated.find(project => {
+        console.log((project._id))
+        console.log(router.query.id)
+        return (
+            project._id === router.query.id)
+    })
+
+    console.log(project)
+
+  */
+
+    console.log(project)
+
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -69,6 +87,28 @@ const ProjectDetail = () => {
     };
     const classes = useStyles();
 
+    const sendData = async () => {
+        try {
+            await axios.post('http://localhost:3000/api/admin/validateProject', {
+                energies: project.energies,
+                amount: project.amount,
+                title: project.title,
+                consumption: project.consumption,
+                infos: project.infos,
+                lat: project.lat,
+                lng: project.lng,
+                city: project.city
+            })
+
+            await axios.post('http://localhost:3000/api/admin/deleteProject', {
+                projectId: project.title
+            })
+            console.log(project._id)
+            await router.push('/thankyou')
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <div>
             <Header />
@@ -78,7 +118,7 @@ const ProjectDetail = () => {
                         <img src={'/goBack.png'} alt=""/>
                         <p className="backText">Back</p>
                     </div>
-                    <h1 className="projectDetailTitle">Project Paris</h1>
+                    <h1 className="projectDetailTitle">{project.title}</h1>
                 </div>
 
                 <div className="ProjectDetailsAndMap">
@@ -97,7 +137,7 @@ const ProjectDetail = () => {
                                 <img src={'/capaciteCarre.png'} alt=""/>
                                 <div className="description">
                                     <p>Capacity</p>
-                                    <h4 className="lowTitle">300MW/year</h4>
+                                    <h4 className="lowTitle">{project.consumption} MW/year</h4>
                                 </div>
                             </div>
                         </div>
@@ -114,14 +154,14 @@ const ProjectDetail = () => {
                                 <img src={'/walletCarre.png'} alt=""/>
                                 <div className="description">
                                     <p>Amount to raise</p>
-                                    <h4 className="lowTitle">230 000€</h4>
+                                    <h4 className="lowTitle">{project.amount} €</h4>
                                 </div>
                             </div>
                         </div>
 
                         <h4 className="projectDetailsTitle">Amount raised</h4>
                         <div className="contributionContainer">
-                            <div className="contributors mb-3">
+                            <div className="contributors2 mb-3">
                                 <div className="numberContributors">
                                     <img src={'/twoUsers.png'} alt=""/>
                                     <p className="amount ml-3">4 contributors</p>
@@ -140,7 +180,7 @@ const ProjectDetail = () => {
                 </div>
 
                 <div className="contributionAndGraph">
-                    <div className="contributionContainer">
+                    <div className="contributionContainer2">
                         <h2>Your contribution</h2>
                         <div className={classes.root}>
                             <div className="contributionChoseContainer">
@@ -186,7 +226,10 @@ const ProjectDetail = () => {
                                 </div>
                             </div>
 
-                            <PurpleButton title="Validate" id="contributeButton" href="/checkout"/>
+                            <PurpleButton title="Validate" id="contributeButton" href="javascript:void(0)" onClick={async () => {
+                                console.log('clicked')
+                                await sendData()
+                            }}/>
                         </div>
                     </div>
                 </div>
@@ -195,5 +238,54 @@ const ProjectDetail = () => {
         </div>
     );
 };
+
+
+
+
+export async function getStaticProps (context) {
+
+    const {params} = context
+    const client = await connectToDatabase();
+    const db = client.db();
+
+    const projectsToBeValidated = await db
+        .collection("projects")
+        .find()
+        .toArray()
+
+    const projects = JSON.parse(JSON.stringify(projectsToBeValidated))
+
+    const project = projects.find(project => {
+        return (
+            project._id === params.id)
+    })
+
+
+    return {
+        props: {
+            project: project,
+        },
+    };
+}
+
+export async function getStaticPaths() {
+    const client = await connectToDatabase();
+    const db = client.db();
+    const project = await db
+        .collection("projects")
+        .find()
+        .toArray()
+
+    const ids = project.map(project => project._id)
+
+
+    return {
+        paths: [
+            {params: {id: 'ddjfdfdfjd'}}
+        ],
+        fallback: 'blocking'
+    }
+}
+
 
 export default ProjectDetail;

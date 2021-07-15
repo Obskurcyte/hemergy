@@ -1,5 +1,6 @@
 import {connectToDatabase} from "../../../lib/db";
 import {hashPassword} from "../../../lib/auth";
+import jwt from 'jsonwebtoken'
 
 async function handler (req, res) {
 
@@ -23,20 +24,32 @@ async function handler (req, res) {
 
         if (existingUser) {
             res.status(422).json({message: 'User already exists'})
-            await client.close()
+            client.close()
             return;
         }
 
         const hashedPassword = await hashPassword(password);
 
-        await db.collection('users').insertOne({
+        const createdUser = await db.collection('users').insertOne({
             name,
             email,
             password: hashedPassword
         });
 
-        res.status(201).json({message: 'Created User'})
-        await client.close()
+        console.log(createdUser)
+        let token;
+        try {
+            token = jwt.sign(
+                {userId: createdUser.id, email: createdUser.email},
+                'hemergysecretkey',
+                {expiresIn: "365d"}
+            );
+        } catch (err) {
+            console.log(err)
+        }
+
+        res.status(201).json({name: createdUser.ops[0].name, token: token})
+        client.close()
 
     }
 

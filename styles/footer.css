@@ -14,6 +14,9 @@
     justify-content: space-around;
 }
 
+.innerFooter {
+    display: flex;
+}
 .imgFooter {
     height: 60%;
 }
@@ -33,4 +36,41 @@
 .copyright {
     text-align: center;
     color: white;
+}
+
+.fullFooter {
+    display: flex;
+}
+
+@media screen and (max-width: 1000px){
+    .innerFooter {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 760px){
+    .footerInnerContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .innerFooter {
+        text-align: center;
+    }
+    .colFooter p {
+        text-align: center;
+        margin-bottom: 3% !important;
+    }
+    .emailFooter {
+        display: none;
+    }
+    .imgFooter {
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    #conditionsOfSales {
+        margin-bottom: 15% !important;
+    }
+    #emailHemergy {
+        margin-bottom: 15% !important;
+    }
 }
