@@ -233,7 +233,6 @@ export async function getStaticPaths() {
 
     const ids = project.map(project => project._id)
 
-
     return {
         paths: [
             {params: {id: 'ddjfdfdfjd'}}
