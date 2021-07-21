@@ -43,7 +43,7 @@ const Map = ({projects}) => {
 
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: process.env.maps,
+        googleMapsApiKey: 'AIzaSyBFxKEYXYTjQfpAeeqskemVBZSj0L4N6Nc',
         libraries
     });
 
