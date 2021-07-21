@@ -265,7 +265,7 @@ const Index = ({projects}) => {
     );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const client = await connectToDatabase();
     const db = client.db();
 
