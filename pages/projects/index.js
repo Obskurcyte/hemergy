@@ -57,6 +57,7 @@ const Index = ({projects}) => {
 
     const classes = useStyles();
 
+    console.log(process.env)
     const [energyChosen, setEnergyChose] = useState('Other')
     const [photoEnergyChosen, setPhotoEnergyChosen] = useState('/lightningViolet.png')
     console.log(projects)
