@@ -170,7 +170,7 @@ const Index = ({projects}) => {
                     </div>
 
                     <div className="projectsFound">
-                        <h3 className="foundProjects">Found 10 projects</h3>
+                        <h3 className="foundProjects">Found {projects.length} projects</h3>
                         <div className="sortBy">
                             <p className="sortByText">Sort by </p>
                             <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>

@@ -9,6 +9,7 @@ const Index = ({projectsToBeValidated}) => {
 
     console.log(projectsToBeValidated)
 
+    console.log(projectsToBeValidated.length)
     return (
         <div>
             <Header />
@@ -16,7 +17,7 @@ const Index = ({projectsToBeValidated}) => {
                 <div className="projectsAdminListContainer">
 
                     <div className="projectsFound">
-                        <h3 className="foundProjects">Found 10 projects</h3>
+                        <h3 className="foundProjects">Found {projectsToBeValidated.length} projects</h3>
                         <div className="sortBy">
                         </div>
                     </div>
