@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "../../components/Header";
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -14,7 +14,7 @@ import ProjectCard from "../../components/ProjectCard";
 import Footer from "../../components/Footer";
 import Map from "../../components/Map";
 import {connectToDatabase} from "../../lib/db";
-import ValidateProjectCard from "../../components/ValidateProjectCard";
+
 
 const Index = ({projects}) => {
 
@@ -36,6 +36,7 @@ const Index = ({projects}) => {
         },
     }));
 
+
     const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -48,20 +49,17 @@ const Index = ({projects}) => {
         setValue(newValue);
     };
 
+
     console.log(projects)
     const handleInputChange = (event) => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
     };
 
-    const handleBlur = () => {
-        if (value < 0) {
-            setValue(0);
-        } else if (value > 100) {
-            setValue(100);
-        }
-    };
     const classes = useStyles();
 
+    const [energyChosen, setEnergyChose] = useState('Other')
+    const [photoEnergyChosen, setPhotoEnergyChosen] = useState('/lightningViolet.png')
+    console.log(projects)
     return (
         <div>
             <Header />
@@ -77,17 +75,70 @@ const Index = ({projects}) => {
                             id="panel4bh-header"
                         >
                             <Typography className={classes.heading}>
-                                <div className="energyListItem">
-                                    <img src={'/lightningViolet.png'} alt=""/>
-                                    <p>Other</p>
+                                <div className="flex">
+                                    <img src={photoEnergyChosen} alt=""/>
+                                    <p>{energyChosen}</p>
                                 </div>
+
                             </Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Typography>
-                                Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-                                vitae egestas augue. Duis vel est augue.
-                            </Typography>
+                            <div className="flex-column itemContainer">
+                                <div className="energyListItem" onClick={() => {
+                                    setEnergyChose('Other')
+                                    projects.sort((a, b) => {
+                                        return b.energies[0] - a.energies[0];
+                                    });
+                                    setPhotoEnergyChosen('/lightningViolet.png')
+                                    setExpanded(false)
+                                }}>
+                                    <img src={'/lightningViolet.png'} alt=""/>
+                                    <p>Other</p>
+                                </div>
+                            <div className="energyListItem" onClick={() => {
+                                setEnergyChose('Solar')
+                                setPhotoEnergyChosen('/yellowSun.png')
+                                setExpanded(false)
+                            }}>
+                                <img src={'/yellowSun.png'} alt=""/>
+                                <p>Solar</p>
+                            </div>
+                            <div className="energyListItem" onClick={() => {
+                                setEnergyChose('Biomass')
+                                setPhotoEnergyChosen('/iconBiomass.png')
+                                setExpanded(false)
+                            }}>
+                                <img src={'/iconBiomass.png'} alt=""/>
+                                <p>Biomass</p>
+                            </div>
+                            <div className="energyListItem" onClick={() => {
+                                projects.sort((a, b) => {
+                                    return b.energies[0] - a.energies[0];
+                                });
+                                setEnergyChose('Geothermal')
+                                setPhotoEnergyChosen('/iconGeothermal.png')
+                                setExpanded(false)
+                            }}>
+                                <img src={'/iconGeothermal.png'} alt=""/>
+                                <p>Geothermal</p>
+                            </div>
+                            <div className="energyListItem" onClick={() => {
+                                setEnergyChose('Hydro')
+                                setPhotoEnergyChosen('/iconHydro.png')
+                                setExpanded(false)
+                            }}>
+                                <img src={'/iconHydro.png'} alt=""/>
+                                <p>Hydro</p>
+                            </div>
+                            <div className="energyListItem" onClick={() => {
+                                setEnergyChose('Wind')
+                                setPhotoEnergyChosen('/iconWind.png')
+                                setExpanded(false)
+                            }}>
+                                <img src={'/iconWind.png'} alt=""/>
+                                <p>Wind</p>
+                            </div>
+                            </div>
                         </AccordionDetails>
                     </Accordion>
                         </div>
@@ -128,17 +179,63 @@ const Index = ({projects}) => {
                                     id="panel4bh-header"
                                 >
                                     <Typography className={classes.heading}>
-                                        <div className="energyListItem">
+                                        <div className="flex">
                                             <img src={'/lightningViolet.png'} alt=""/>
                                             <p>New</p>
                                         </div>
                                     </Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
-                                    <Typography>
-                                        Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-                                        vitae egestas augue. Duis vel est augue.
-                                    </Typography>
+                                    <div className="flex-column itemContainer">
+                                        <div className="energyListItem" onClick={() => {
+                                            setEnergyChose('Other')
+                                            setPhotoEnergyChosen('/lightningViolet.png')
+                                            setExpanded(false)
+                                        }}>
+                                            <img src={'/lightningViolet.png'} alt=""/>
+                                            <p>Other</p>
+                                        </div>
+                                        <div className="energyListItem" onClick={() => {
+                                            setEnergyChose('Solar')
+                                            setPhotoEnergyChosen('/yellowSun.png')
+                                            setExpanded(false)
+                                        }}>
+                                            <img src={'/yellowSun.png'} alt=""/>
+                                            <p>Solar</p>
+                                        </div>
+                                        <div className="energyListItem" onClick={() => {
+                                            setEnergyChose('Biomass')
+                                            setPhotoEnergyChosen('/iconBiomass.png')
+                                            setExpanded(false)
+                                        }}>
+                                            <img src={'/iconBiomass.png'} alt=""/>
+                                            <p>Biomass</p>
+                                        </div>
+                                        <div className="energyListItem" onClick={() => {
+                                            setEnergyChose('Geothermal')
+                                            setPhotoEnergyChosen('/iconGeothermal.png')
+                                            setExpanded(false)
+                                        }}>
+                                            <img src={'/iconGeothermal.png'} alt=""/>
+                                            <p>Geothermal</p>
+                                        </div>
+                                        <div className="energyListItem" onClick={() => {
+                                            setEnergyChose('Hydro')
+                                            setPhotoEnergyChosen('/iconHydro.png')
+                                            setExpanded(false)
+                                        }}>
+                                            <img src={'/iconHydro.png'} alt=""/>
+                                            <p>Hydro</p>
+                                        </div>
+                                        <div className="energyListItem" onClick={() => {
+                                            setEnergyChose('Wind')
+                                            setPhotoEnergyChosen('/iconWind.png')
+                                            setExpanded(false)
+                                        }}>
+                                            <img src={'/iconWind.png'} alt=""/>
+                                            <p>Wind</p>
+                                        </div>
+                                    </div>
                                 </AccordionDetails>
                             </Accordion>
                         </div>
@@ -150,6 +247,8 @@ const Index = ({projects}) => {
                                 link={project._id}
                                 title={project.title}
                                 consumption={project.consumption}
+                                city={project.city}
+                                energy={project.energies[0]}
                             />
                         </div>
                         ))}

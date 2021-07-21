@@ -1,11 +1,17 @@
 .energyListItem {
     display: flex;
+    border-top: 1px solid #78889F;
+    padding: 3%;
+    cursor: pointer;
 }
 
 .projectsListContainer {
     width: 45%;
 }
 
+.itemContainer {
+    width: 100%;
+}
 .projectsFullContainer {
     display: flex;
     max-width: 80%;
@@ -69,6 +75,7 @@
 .sortBy {
     display: flex;
     width: 35%;
+    height: 50px;
 }
 
 .foundProjects {
@@ -100,4 +107,84 @@
     width: 100%;
     max-width: 400px;
     z-index: 10;
+}
+
+.projectTitleContainer h4 {
+    font-size: 1.2rem;
+}
+
+
+
+@media screen and (max-width: 1700px){
+    .sortBy {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1500px){
+    .sortBy {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1250px){
+    .projectsFullContainer {
+        max-width: 90%;
+    }
+}
+
+@media screen and (max-width: 1150px){
+    .projectsFullContainer {
+        max-width: 95%;
+    }
+}
+
+@media screen and (max-width: 1070px){
+        .projectsFullContainer {
+            flex-direction: column-reverse;
+            overflow: hidden;
+        }
+    .carteContainer {
+        width: 100%;
+        margin-top: 0;
+    }
+    .mapUltraContainer {
+        width: 100% !important;
+    }
+    .projectsListContainer {
+        width: 100%;
+        margin-top: 5%;
+    }
+    .sortBy {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .sortBy {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 570px){
+    .sortBy {
+        width: 50%;
+    }
+    .projectCardContainer {
+        flex-direction: column;
+    }
+    .panneauImg {
+        height: 300px;
+    }
+
+}
+
+@media screen and (max-width: 450px){
+    .sortBy {
+        width: 70%;
+    }
+    .projectCardContainer {
+        flex-direction: column;
+    }
+
 }

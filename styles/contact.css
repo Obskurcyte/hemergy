@@ -1,0 +1,48 @@
+.contactSuperContainer h1{
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.contactSuperContainer {
+    padding: 5%;
+}
+
+.contactSuperContainer p{
+    color: #826F89
+}
+
+.photoChiffre {
+    height: 30px;
+    margin-right: 2%;
+}
+
+.photoChiffreContainer {
+    margin: 1%;
+}
+.contactSuperContainer h3 {
+    font-weight: bold;
+    margin-top: 3%;
+    margin-bottom: 1%;
+    color: black;
+}
+
+.contactSuperContainer h5 {
+    font-weight: bold;
+    margin-top: 3%;
+    margin-bottom: 1%;
+    color: black;
+}
+
+.contactPhoto {
+    margin-right: 1%;
+}
+.contactImg {
+    margin-top: 1%;
+}
+.locationImg {
+    height: 5%;
+}
+
+.infoContainer {
+    margin: 1%;
+}

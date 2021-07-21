@@ -9,7 +9,7 @@ const ValidateProjectCard = (props) => {
             <div className="projectCard">
                 <div className="projectTitleContainer">
                     <h4 className="projectCardTitle">{props.title}</h4>
-                    <PurpleButton title="View details" id="contribute" href={`/admin/${props.link}`}/>
+                    <PurpleButton title="View details" id="contribute" href={`/admin/[id]`} as={`/admin/${props.link}`}/>
                 </div>
                 <div className="locationContainer">
                     <img src={'/Location.png'} alt=""/>

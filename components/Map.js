@@ -98,6 +98,7 @@ const Map = ({projects}) => {
                 mapContainerStyle={mapContainerStyle}
                 zoom={3}
                 center={center}
+                mapContainerClassName="mapUltraContainer"
                 options={options}
                 onLoad={onMapLoad}
             >

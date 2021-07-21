@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "../../components/Header";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -9,6 +9,9 @@ import PurpleButton from "../../components/PurpleButton";
 import Map from "../../components/Map";
 import Footer from "../../components/Footer";
 import {connectToDatabase} from "../../lib/db";
+import {useRouter} from "next/router";
+import LineChart from "../../components/Chart";
+import RedChart from "../../components/RedChart";
 
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -68,7 +71,16 @@ const ProjectDetail = ({project}) => {
             setValue(100);
         }
     };
+
     const classes = useStyles();
+
+    const router = useRouter()
+    console.log(project)
+
+
+    const [isContribution, setIsContribution] = useState(true)
+
+
 
     return (
         <div>
@@ -77,7 +89,7 @@ const ProjectDetail = ({project}) => {
                 <div className="projectDetailTitleContainer">
                     <div className="goBackContainer">
                         <img src={'/goBack.png'} alt=""/>
-                        <p className="backText">Back</p>
+                        <p className="backText" onClick={() => router.push('/projects')}>Back</p>
                     </div>
                     <h1 className="projectDetailTitle">{project.title}</h1>
                 </div>
@@ -190,6 +202,22 @@ const ProjectDetail = ({project}) => {
                             <PurpleButton title="Contribute" id="contributeButton" href="/checkout"/>
                         </div>
                     </div>
+
+                    <div className="graphContainer">
+                        <div className="graphChoice flex">
+                            <div className={isContribution ? "returnContrib": "notreturnContrib"} onClick={() => setIsContribution(!isContribution)}>
+                                <p className={isContribution ? "returnContribText": "notreturnContribText"}>Return on contribution</p>
+                            </div>
+                            <div className={isContribution ? "notreturnContrib": "returnContrib"} onClick={() => setIsContribution(!isContribution)}>
+                                <p className={isContribution ? "notreturnContribText": "returnContribText"}>Reduced carbon</p>
+                            </div>
+                        </div>
+
+                        <div className="graph">
+                            {isContribution ? <LineChart /> : <RedChart/>}
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <Footer />
@@ -233,11 +261,10 @@ export async function getStaticPaths() {
 
     const ids = project.map(project => project._id)
 
+    const paths = ids.map(id => ({params: {id: id.toString()}}))
     return {
-        paths: [
-            {params: {id: 'ddjfdfdfjd'}}
-        ],
-        fallback: 'blocking'
+       paths,
+        fallback: false
     }
 }
 

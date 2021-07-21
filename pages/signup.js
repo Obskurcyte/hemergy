@@ -151,7 +151,7 @@ const Signup = () => {
                         cookiePolicy="single_host_origin"
                     />
                 <FacebookLogin
-                    appId="356594049214338"
+                    appId={process.env.FACEBOOK_CLIENT_ID}
                     autoLoad={true}
                     render={(renderProps) => (
                         <div className="oauthInnerContainer" onClick={renderProps.onClick}>

@@ -11,6 +11,8 @@ import '../styles/checkout.css';
 import '../styles/wallet.css';
 import '../styles/started.css';
 import '../styles/profile.css';
+import '../styles/contact.css';
+
 import '../i18n';
 import Head from 'next/head';
 import {AuthContext} from "../context/auth";

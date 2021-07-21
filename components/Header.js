@@ -59,8 +59,8 @@ const Header = () => {
                         <Nav.Link href="javascript:void(0)" className={styles.navLinks}>{t("NavBar1")}</Nav.Link>
                         <Nav.Link href="projects" className={styles.navLinks}>{t("NavBar2")}</Nav.Link>
                         <Nav.Link href="/postProject" className={styles.navLinks}>{t("NavBar3")}</Nav.Link>
-                        <Nav.Link href="#link" className={styles.navLinks}>{t("NavBar4")}</Nav.Link>
-                        <Nav.Link href="#link" className={styles.navLinks}>{t("NavBar5")}</Nav.Link>
+                        <Nav.Link href="/ecosystem" className={styles.navLinks}>{t("NavBar4")}</Nav.Link>
+                        <Nav.Link href="/contact" className={styles.navLinks}>{t("NavBar5")}</Nav.Link>
                         <NavDropdown title={lang.toUpperCase()} id="basic-nav-dropdown" className={styles.navLinks}>
                             <NavDropdown.Item href="javascript:void(0)" onClick={() => handleClose('fr')}>FR</NavDropdown.Item>
                             <NavDropdown.Item href="javascript:void(0)" onClick={() => handleClose('es')}>ESP</NavDropdown.Item>

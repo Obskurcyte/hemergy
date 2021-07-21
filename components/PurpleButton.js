@@ -6,7 +6,7 @@ import styles from './PurpleButton.module.css';
 const PurpleButton = (props) => {
     return (
         <div className={styles.buttonContainer} style={props.style} id={props.id} onClick={props.onClick}>
-            <Link href={`${props.href}`}><p className={styles.buttonText}>{props.title}</p></Link>
+            <Link href={`${props.href}`} as={`${props.as}`}><p className={styles.buttonText}>{props.title}</p></Link>
         </div>
     );
 };

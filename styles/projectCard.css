@@ -10,23 +10,35 @@
     margin-top: 3%;
 }
 
+
 .projectCard {
     padding-left: 4%;
     padding-top: 3%;
+    padding-right: 4%;
+    padding-bottom: 3%;
+    width: 100%;
 }
 .locationContainer {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 5%;
 }
 
 .consommationContainer {
     display: flex;
     justify-content: space-between;
+
 }
 
-.energyContainer {
-    display: flex;
+.locationCardImg {
+    height: 30px;
+}
+.excludeImg {
+    height: 25px;
+}
+
+
+.energyContainerProject {
+    display: inline-flex;
     justify-content: space-between;
 }
 
@@ -38,4 +50,8 @@
 
 #contribute {
     border-radius: 15px;
+    width: unset;
+    height: 40px;
+    text-align: center;
 }
+
