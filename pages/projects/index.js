@@ -8,8 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
-import Input from '@material-ui/core/Input';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 import ProjectCard from "../../components/ProjectCard";
 import Footer from "../../components/Footer";
 import Map from "../../components/Map";
@@ -47,20 +45,27 @@ const Index = ({projects}) => {
 
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
-    };
-
-
-    console.log(projects)
-    const handleInputChange = (event) => {
-        setValue(event.target.value === '' ? '' : Number(event.target.value));
+        filterProduction(value)
     };
 
     const classes = useStyles();
-
-    console.log(process.env)
     const [energyChosen, setEnergyChose] = useState('Other')
     const [photoEnergyChosen, setPhotoEnergyChosen] = useState('/lightningViolet.png')
-    console.log(projects)
+    console.log(projects);
+    const [filteredProjects, setFilteredProjects] = useState([])
+    const filterProject = (energyFiltered) => {
+        setFilteredProjects(projects.filter(project => {
+            return (project.energy === energyFiltered)
+        }))
+    }
+
+    const filterProduction = (production) => {
+        setFilteredProjects(projects.filter(project => {
+            return project.consumption > production
+        }))
+    }
+
+    console.log('filter', filteredProjects)
     return (
         <div>
             <Header />
@@ -87,9 +92,7 @@ const Index = ({projects}) => {
                             <div className="flex-column itemContainer">
                                 <div className="energyListItem" onClick={() => {
                                     setEnergyChose('Other')
-                                    projects.sort((a, b) => {
-                                        return b.energies[0] - a.energies[0];
-                                    });
+                                    setFilteredProjects([])
                                     setPhotoEnergyChosen('/lightningViolet.png')
                                     setExpanded(false)
                                 }}>
@@ -98,6 +101,7 @@ const Index = ({projects}) => {
                                 </div>
                             <div className="energyListItem" onClick={() => {
                                 setEnergyChose('Solar')
+                                filterProject('Solar')
                                 setPhotoEnergyChosen('/yellowSun.png')
                                 setExpanded(false)
                             }}>
@@ -106,6 +110,7 @@ const Index = ({projects}) => {
                             </div>
                             <div className="energyListItem" onClick={() => {
                                 setEnergyChose('Biomass')
+                                filterProject('Biomass')
                                 setPhotoEnergyChosen('/iconBiomass.png')
                                 setExpanded(false)
                             }}>
@@ -113,10 +118,8 @@ const Index = ({projects}) => {
                                 <p>Biomass</p>
                             </div>
                             <div className="energyListItem" onClick={() => {
-                                projects.sort((a, b) => {
-                                    return b.energies[0] - a.energies[0];
-                                });
                                 setEnergyChose('Geothermal')
+                                filterProject('Geothermal')
                                 setPhotoEnergyChosen('/iconGeothermal.png')
                                 setExpanded(false)
                             }}>
@@ -125,6 +128,7 @@ const Index = ({projects}) => {
                             </div>
                             <div className="energyListItem" onClick={() => {
                                 setEnergyChose('Hydro')
+                                filterProject('Hydro')
                                 setPhotoEnergyChosen('/iconHydro.png')
                                 setExpanded(false)
                             }}>
@@ -133,6 +137,7 @@ const Index = ({projects}) => {
                             </div>
                             <div className="energyListItem" onClick={() => {
                                 setEnergyChose('Wind')
+                                filterProject('Wind')
                                 setPhotoEnergyChosen('/iconWind.png')
                                 setExpanded(false)
                             }}>
@@ -160,7 +165,7 @@ const Index = ({projects}) => {
                                     aria-labelledby="input-slider"
                                     min={0}
                                     style={{color: '#7F6CFC'}}
-                                    max={100000}
+                                    max={1000}
                                 />
                             </Grid>
                         </Grid>
@@ -170,8 +175,8 @@ const Index = ({projects}) => {
                     </div>
 
                     <div className="projectsFound">
-                        <h3 className="foundProjects">Found {projects.length} projects</h3>
-                        <div className="sortBy">
+                        <h3 className="foundProjects">Found {filteredProjects.length === 0 ? projects.length : filteredProjects.length} projects</h3>
+                        {/*  <div className="sortBy">
                             <p className="sortByText">Sort by </p>
                             <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
                                 <AccordionSummary
@@ -240,19 +245,30 @@ const Index = ({projects}) => {
                                 </AccordionDetails>
                             </Accordion>
                         </div>
+                        */}
                     </div>
 
-                    {projects.map(project => (
+                    {filteredProjects.length === 0 ? (projects.map(project => (
+                            <div className="projectsList">
+                                <ProjectCard
+                                    link={project._id}
+                                    title={project.title}
+                                    consumption={project.consumption}
+                                    city={project.city}
+                                    energy={project.energy}
+                                />
+                            </div>
+                        ))) : (filteredProjects.map(project => (
                         <div className="projectsList">
                             <ProjectCard
                                 link={project._id}
                                 title={project.title}
                                 consumption={project.consumption}
                                 city={project.city}
-                                energy={project.energies[0]}
+                                energy={project.energy}
                             />
                         </div>
-                        ))}
+                        )))}
                 </div>
 
                 <div className="carteContainer">

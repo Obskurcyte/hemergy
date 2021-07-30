@@ -5,6 +5,11 @@
     margin: 2% auto;
 }
 
+.headTitle h3 {
+    font-size: 24px;
+    line-height: 160%;
+    color: #826F89
+}
 .join{
     width: 30% !important;
 }
@@ -269,7 +274,7 @@
 
 .contactInput {
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     width: 48%;
     padding: 1.5% 1%;
     display: flex;
@@ -293,10 +298,39 @@
     color: #AE9ABA;
 }
 
+.dialog-container {
+    padding: 8%;
+    align-items: center;
+}
+.dialog-img-container img {
+    width: 100%;
+}
+.dialog-img-container {
+    width: 20%;
+    margin: 0 auto;
+}
+.dialog-paragraph {
+    font-family: Poppins-Regular, sans-serif;
+    color: #826F89;
+    font-size: 16px;
+    text-align: center;
+}
+
+#sendButton {
+    width: 100%;
+    margin-top: 10%;
+    padding: 5% 5%;
+}
+.messageSent {
+    font-size: 24px;
+    font-family: Poppins-SemiBold, sans-serif;
+    line-height: 39px;
+    text-align: center;
+}
 .bigInput {
     width: 100%;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 1.5% 1%;
     margin-top: 3%;
     height: 250px;

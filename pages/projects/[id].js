@@ -48,40 +48,58 @@ const ProjectDetail = ({project}) => {
         },
     }));
 
-    const [expanded, setExpanded] = React.useState(false);
+    let imgSource;
 
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
 
     const [value, setValue] = React.useState(30);
 
+    const euroValue = `${value} €`
+
+    console.log(euroValue)
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const handleInputChange = (event) => {
-        setValue(event.target.value === '' ? '' : Number(event.target.value));
-    };
-
-    const handleBlur = () => {
-        if (value < 0) {
-            setValue(0);
-        } else if (value > 100) {
-            setValue(100);
-        }
-    };
 
     const classes = useStyles();
 
     const router = useRouter()
     console.log(project)
 
+    const energy = project.energy
 
+    if (energy === 'Solar') {
+        imgSource = '/soleilCarre.png'
+    }
+
+    if (energy === 'Biomass') {
+        imgSource = '/iconBiomass.png'
+    }
+
+    if (energy === 'Hydro') {
+        imgSource = '/iconHydro.png'
+    }
+
+    if (energy === 'Wind') {
+        imgSource = '/iconWind.png'
+    }
+
+    if (energy === 'Geothermal') {
+        imgSource = '/iconGeothermal.png'
+    }
     const [isContribution, setIsContribution] = useState(true)
 
 
 
+    const avoidedCarbon = project.consumption * 1000 * 790 * 10**(-6)
+    const totalEarnings = value*(1.07)**19;
+
+    const goToCheckout = async () => {
+        await router.push({
+            pathname: '/checkout',
+            query: {consumption: project.consumption, contribution: value, energy: energy}
+        })
+    }
     return (
         <div>
             <Header />
@@ -100,14 +118,14 @@ const ProjectDetail = ({project}) => {
                         <h4 className="projectDetailsTitle">Project details</h4>
                         <div className="line">
                             <div className="energyTypeContainer">
-                                <img src={'/soleilCarre.png'} alt=""/>
+                                <img src={imgSource} alt="" className='imgDetails'/>
                                 <div className="description">
                                     <p>Energy Type</p>
-                                    <h4 className="lowTitle">Solar</h4>
+                                    <h4 className="lowTitle">{energy}</h4>
                                 </div>
                             </div>
                             <div className="energyTypeContainer">
-                                <img src={'/capaciteCarre.png'} alt=""/>
+                                <img src={'/capaciteCarre.png'} alt="" className='imgDetails'/>
                                 <div className="description">
                                     <p>Capacity</p>
                                     <h4 className="lowTitle">{project.consumption} MW/year</h4>
@@ -117,14 +135,14 @@ const ProjectDetail = ({project}) => {
 
                         <div className="line">
                             <div className="energyTypeContainer">
-                                <img src={'/avoidedCarbon.png'} alt=""/>
+                                <img src={'/avoidedCarbon.png'} alt="" className='imgDetails'/>
                                 <div className="description">
                                     <p>Avoided carbon</p>
-                                    <h4 className="lowTitle">254 T eq.CO2/year</h4>
+                                    <h4 className="lowTitle">{avoidedCarbon.toFixed(2)} T eq.CO2/year</h4>
                                 </div>
                             </div>
                             <div className="energyTypeContainer">
-                                <img src={'/walletCarre.png'} alt=""/>
+                                <img src={'/walletCarre.png'} alt="" className='imgDetails'/>
                                 <div className="description">
                                     <p>Amount to raise</p>
                                     <h4 className="lowTitle">{project.amount} €</h4>
@@ -162,14 +180,21 @@ const ProjectDetail = ({project}) => {
                                 </Typography>
                                 <div className="inputAmount2">
                                     <img src={'/Wallet.png'} alt=""/>
-                                    <p className='productionValue'>{value} €</p>
+                                    <input
+                                        className='productionValue'
+                                        value={value}
+                                        onChange={(e) => {
+                                            console.log(typeof e.target.value)
+                                            setValue(e.target.value)
+                                        }}
+                                        />
                                 </div>
 
                             </div>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid item xs>
                                     <Slider
-                                        value={typeof value === 'number' ? value : 0}
+                                        value={value}
                                         onChange={handleSliderChange}
                                         aria-labelledby="input-slider"
                                         min={0}
@@ -187,19 +212,19 @@ const ProjectDetail = ({project}) => {
                                     <img src={'/walletCarre.png'} alt=""/>
                                     <div className="description">
                                         <p>Earning</p>
-                                        <h4 className="lowTitle">230 000€</h4>
+                                        <h4 className="lowTitle">{totalEarnings.toFixed(2)} €</h4>
                                     </div>
                                 </div>
                                 <div className="energyTypeContainer">
                                     <img src={'/avoidedCarbon.png'} alt=""/>
                                     <div className="description">
                                         <p>Reduced carbon</p>
-                                        <h4 className="lowTitle">254 T eq.CO2/year</h4>
+                                        <h4 className="lowTitle">{avoidedCarbon.toFixed(2)} T eq.CO2/year</h4>
                                     </div>
                                 </div>
                             </div>
 
-                            <PurpleButton title="Contribute" id="contributeButton" href="/checkout"/>
+                            <PurpleButton title="Contribute" id="contributeButton" href="javascript:void(0)" onClick={() => goToCheckout()}/>
                         </div>
                     </div>
 
@@ -214,7 +239,7 @@ const ProjectDetail = ({project}) => {
                         </div>
 
                         <div className="graph">
-                            {isContribution ? <LineChart /> : <RedChart/>}
+                            {isContribution ? <LineChart height={245} width={600} value={value}/> : <RedChart height={245} width={600} value={project.consumption}/>}
                         </div>
                     </div>
 

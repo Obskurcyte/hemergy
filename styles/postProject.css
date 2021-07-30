@@ -144,15 +144,27 @@
     margin-bottom: 3%;
 }
 
+#suivantButton1 {
+    width: 20%;
+    margin: 0 auto;
+    padding: 1% 5%;
+}
+
+.postProjectContainer {
+    position: relative;
+}
+
 #suivantButton {
     width: 40%;
     margin: 0 auto;
 }
-
 .suivantContainerPost {
     width: 90%;
     margin-left: 5%;
     margin-top: 5%;
+    position: absolute;
+    right: 5%;
+    bottom: 14%;
 }
 
 .blanck {

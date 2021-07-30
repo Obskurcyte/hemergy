@@ -89,8 +89,8 @@ const ProjectDetail = ({projectsToBeValidated, project}) => {
 
     const sendData = async () => {
         try {
-            await axios.post('https://hemergy.vercel.app/api/admin/validateProject', {
-                energies: project.energies,
+            await axios.post('/api/admin/validateProject', {
+                energy: project.energy,
                 amount: project.amount,
                 title: project.title,
                 consumption: project.consumption,
@@ -100,7 +100,7 @@ const ProjectDetail = ({projectsToBeValidated, project}) => {
                 city: project.city
             })
 
-            await axios.post('https://hemergy.vercel.app/api/admin/deleteProject', {
+            await axios.post('/api/admin/deleteProject', {
                 projectId: project.title
             })
             console.log(project._id)

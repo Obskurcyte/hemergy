@@ -9,8 +9,9 @@ import {AuthContext} from "../context/auth";
 import Avatar from '@material-ui/core/Avatar';
 import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
+import {Link as ScrollLink} from 'react-scroll';
 
-const Header = () => {
+const Header = (props) => {
 
     const { t, i18n } = useTranslation();
     const lang = i18next.language;
@@ -56,11 +57,21 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto expandNav">
-                        <Nav.Link href="javascript:void(0)" className={styles.navLinks}>{t("NavBar1")}</Nav.Link>
-                        <Nav.Link href="projects" className={styles.navLinks}>{t("NavBar2")}</Nav.Link>
-                        <Nav.Link href="/postProject" className={styles.navLinks}>{t("NavBar3")}</Nav.Link>
-                        <Nav.Link href="/ecosystem" className={styles.navLinks}>{t("NavBar4")}</Nav.Link>
-                        <Nav.Link href="/contact" className={styles.navLinks}>{t("NavBar5")}</Nav.Link>
+                        {props.accueil ?
+                                <ScrollLink activeClass="active" to="aboutUs" spy={true} smooth={true} className='Header_navLinks__Wqkkq nav-link'>{t("NavBar1")}</ScrollLink>
+                         : ''}
+
+
+                        <Nav.Link href="/projects" className={styles.navLinks} id={styles.nav2}>{t("NavBar2")}</Nav.Link>
+                        <Nav.Link href="/postProject" className={styles.navLinks} id={styles.nav3}>{t("NavBar3")}</Nav.Link>
+                        <Nav.Link href="/ecosystem" className={styles.navLinks} id={styles.nav4}>{t("NavBar4")}</Nav.Link>
+
+                        {props.accueil ?
+                            <ScrollLink activeClass="active" to="contact" spy={true} smooth={true} className='Header_navLinks__Wqkkq nav-link'>
+                                {t("NavBar5")}
+                            </ScrollLink> : ''
+                        }
+
                         <NavDropdown title={lang.toUpperCase()} id="basic-nav-dropdown" className={styles.navLinks}>
                             <NavDropdown.Item href="javascript:void(0)" onClick={() => handleClose('fr')}>FR</NavDropdown.Item>
                             <NavDropdown.Item href="javascript:void(0)" onClick={() => handleClose('es')}>ESP</NavDropdown.Item>
@@ -73,7 +84,9 @@ const Header = () => {
                                         <Avatar>{initial}</Avatar>
 
                                         <NavDropdown title="" id="basic-nav-dropdown" className={styles.navLinks}>
-                                            <NavDropdown.Item href={'/wallet'}>Check my wallet</NavDropdown.Item>
+                                            <NavDropdown.Item href={'/wallet'} onClick={async () => {
+                                                await router.push('/wallet')
+                                            }}>Check my wallet</NavDropdown.Item>
                                             <NavDropdown.Item href={"/profile"}  onClick={async () => {
                                                 await router.push('/profile')
                                             }}>Modify my infos</NavDropdown.Item>

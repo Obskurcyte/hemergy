@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
     CardElement,
     useStripe,
@@ -12,7 +12,7 @@ import axios from "axios";
 import PurpleButton from "./PurpleButton";
 import WhiteButton from "./WhiteButton";
 import {Formik} from 'formik'
-import {Row} from 'react-bootstrap';
+import {useRouter} from "next/router";
 
 const CardElementContainer = styled.div`
   height: 100%;
@@ -25,14 +25,26 @@ const CardElementContainer = styled.div`
   }
 `;
 
-const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone }) => {
+const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution }) => {
     const [isProcessing, setProcessingTo] = useState(false);
     const [checkoutError, setCheckoutError] = useState();
     const [done, setDone] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
 
-    console.log(isPaymentDone)
+    const [dataUser, setDataUser] = useState(null);
+
+    const router = useRouter()
+    useEffect(() => {
+        if ( process.browser) {
+            let userData = localStorage.getItem('userDataHemergy');
+            const trueData = JSON.parse(userData);
+            setDataUser(trueData)
+        }
+    }, []);
+    console.log(dataUser)
+
+    const [paymentDone, setIsPaymentDone] = useState(false);
     // TIP
     // use the cardElements onChange prop to add a handler
     // for setting any errors:
@@ -100,117 +112,141 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone }) => {
     //creation of payment intent
 
 
+    console.log(paymentDone)
     return (
-        <Formik
-            initialValues={{
-                name: '',
-                cardNumber: ''
-            }}
-            onSubmit={async (values) => {
+        <div>
+        {paymentDone ?
+            <div className="stepContainer2 mb-5 mt-5">
+                <h3 className="purpleTitle mb-3">Done !</h3>
+                <div className="flex mb-4">
+                    <img src={'/HeartCarre.png'} alt=""/>
+                    <h4 className="mt-3 ml-3">Thanks for your contribution !</h4>
+                </div>
+                <PurpleButton title="Go to your wallet" onClick={async () => await router.push('/wallet')} href="/wallet"/>
+            </div> : <Formik
+                initialValues={{
+                    name: '',
+                    cardNumber: ''
+                }}
+                onSubmit={async (values) => {
 
-                const cardValues = {
-                    card: values.cardNumber,
-                    name: values.name
-                }
 
-                console.log(values)
-
-                localStorage.setItem('cardName', values.name)
-
-                setProcessingTo(true);
-
-                const cardElement = elements.getElement("cardNumber");
-
-                try {
-                    const { data: clientSecret } = await axios.post("/api/payment_intents", {
-                        amount: price * 100
-                    });
-
-                    const paymentMethodReq = await stripe.createPaymentMethod({
-                        type: "card",
-                        card: cardElement,
-                    });
-
-                    console.log(paymentMethodReq)
-
-                    if (paymentMethodReq.error) {
-                        setCheckoutError(paymentMethodReq.error.message);
-                        setProcessingTo(false);
-                        return;
+                    const cardValues = {
+                        card: values.cardNumber,
+                        name: values.name
                     }
 
-                    const { error } = await stripe.confirmCardPayment(clientSecret, {
-                        payment_method: paymentMethodReq.paymentMethod.id
-                    });
+                    console.log(values)
 
-                    console.log(error)
-                    if (error) {
-                        setCheckoutError(error.message);
-                        setProcessingTo(false);
-                        return;
+                    localStorage.setItem('cardName', values.name)
+
+                    setProcessingTo(true);
+
+                    const cardElement = elements.getElement("cardNumber");
+
+                    try {
+                        const { data: clientSecret } = await axios.post("/api/payment_intents", {
+                            amount: price * 100
+                        });
+
+                        const paymentMethodReq = await stripe.createPaymentMethod({
+                            type: "card",
+                            card: cardElement,
+                        });
+
+
+                        try {
+                            const response =  await axios.post('/api/profile/wallet', {
+                                email: dataUser.email,
+                                name: dataUser.name,
+                                contribution: contribution
+                            })
+                            console.log('reponse', response)
+                            setIsPaymentDone(true)
+                        } catch (err) {
+                            console.log(err)
+                        }
+
+                        console.log(paymentMethodReq)
+
+                        if (paymentMethodReq.error) {
+                            setCheckoutError(paymentMethodReq.error.message);
+                            setProcessingTo(false);
+                            return;
+                        }
+
+
+
+                        const { error } = await stripe.confirmCardPayment(clientSecret, {
+                            payment_method: paymentMethodReq.paymentMethod.id
+                        });
+                        if (error) {
+                            setCheckoutError(error.message);
+                            setProcessingTo(false);
+                        }
+                    } catch (err) {
+                        console.log(err)
+                        setCheckoutError(err.message);
                     }
 
-                    window.location.reload()
-                } catch (err) {
-                    console.log(err)
-                    setCheckoutError(err.message);
-                }
-            }}
-        >
-            {props => (
-                <form className="checkoutForm">
-                    <div className="formContainer">
-                        <CardElementContainer>
-                            <div className="creditCardInput flex pl-3">
-                                <img src={'/creditCard.png'} alt="" className='img-form'/>
-                                <CardNumberElement
-                                    options={cardElementOpts}
-                                    value={props.values.cardNumber}
-                                    onChange={props.handleChange('cardNumber')}
-                                />
+                }}
+            >
+                {props => (
+                    <form className="checkoutForm">
+                        <div className="formContainer">
+                            <CardElementContainer>
+                                <div className="creditCardInput flex pl-3">
+                                    <img src={'/creditCard.png'} alt="" className='img-form'/>
+                                    <CardNumberElement
+                                        options={cardElementOpts}
+                                        value={props.values.cardNumber}
+                                        onChange={props.handleChange('cardNumber')}
+                                    />
 
-                            </div>
+                                </div>
 
-                            <div className="creditCardInput flex pl-3 pt-2 pb-2">
-                                <img src={'/Profile.png'} alt="" className='img-checkout'/>
-                                <input
-                                    type="text"
-                                    placeholder="Cardholder name"
-                                    className="inputCheckout mt-1 mb-1"
-                                    value={props.values.name}
-                                    onChange={props.handleChange('name')}
-                                />
-                            </div>
-
-                            <div className="flex justify-content-between expiry-container">
-                                <div className="creditCardInputMini flex pl-3">
-                                    <img src={'/Calendar.png'} alt="" className='img-form-mini'/>
-                                    <CardExpiryElement
-                                        options={cardElementOpts2}
-                                        onChange={handleCardDetailsChange}
+                                <div className="creditCardInput flex pl-3 pt-2 pb-2">
+                                    <img src={'/Profile.png'} alt="" className='img-checkout'/>
+                                    <input
+                                        type="text"
+                                        placeholder="Cardholder name"
+                                        className="inputCheckout mt-1 mb-1"
+                                        value={props.values.name}
+                                        onChange={props.handleChange('name')}
                                     />
                                 </div>
 
-                                <div className="creditCardInputMini flex pl-3">
-                                    <img src={'/Lock.png'} alt="" className='img-form-mini'/>
-                                    <CardCvcElement
-                                        options={cardElementOpts3}
-                                        onChange={handleCardDetailsChange}
-                                    />
+                                <div className="flex justify-content-between expiry-container">
+                                    <div className="creditCardInputMini flex pl-3">
+                                        <img src={'/Calendar.png'} alt="" className='img-form-mini'/>
+                                        <CardExpiryElement
+                                            options={cardElementOpts2}
+                                            onChange={handleCardDetailsChange}
+                                        />
+                                    </div>
+
+                                    <div className="creditCardInputMini flex pl-3">
+                                        <img src={'/Lock.png'} alt="" className='img-form-mini'/>
+                                        <CardCvcElement
+                                            options={cardElementOpts3}
+                                            onChange={handleCardDetailsChange}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                        </CardElementContainer>
-                    </div>
-                    {/* TIP always disable your submit button while processing payments */}
-                    <div className="flex justify-content-between mt-4">
-                        <PurpleButton title="Payment" id="pay-button" href="javascript:void(0)" onClick={props.handleSubmit}/>
-                        <WhiteButton title="Back" id='back-button'/>
-                    </div>
-                </form>
-            )}
+                            </CardElementContainer>
+                        </div>
+                        {/* TIP always disable your submit button while processing payments */}
+                        <div className="flex justify-content-between mt-4">
+                            <PurpleButton title="Payment" id="pay-button" href="javascript:void(0)" onClick={props.handleSubmit}/>
+                            <WhiteButton title="Back" id='back-button'/>
+                        </div>
+                    </form>
+                )}
 
-        </Formik>
+            </Formik>}
+
+        </div>
     );
 };
 

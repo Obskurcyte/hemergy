@@ -8,10 +8,61 @@ import ReactPlayer from 'react-player'
 import Footer from "../components/Footer";
 import {useSession} from "next-auth/client";
 import {useTranslation} from "react-i18next";
+import {Formik} from "formik";
+import axios from 'axios';
+import {useRouter} from "next/router";
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import PersonIcon from '@material-ui/icons/Person';
+import AddIcon from '@material-ui/icons/Add';
+import Typography from '@material-ui/core/Typography';
+import { blue } from '@material-ui/core/colors';
 
 export default function Home() {
 
     const { t, i18n } = useTranslation();
+
+
+    const router = useRouter()
+
+    function SimpleDialog(props) {
+        const { onClose, selectedValue, open } = props;
+
+        const handleClose = () => {
+            onClose(selectedValue);
+        };
+
+
+        return (
+            <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+                <div className="dialog-container">
+                    <div className="dialog-img-container">
+                        <img src={'/oksquare.png'} alt=""/>
+                    </div>
+                    <h3 className='messageSent'>Message Sent !</h3>
+                    <p className="dialog-paragraph">Your message has been successfully sent</p>
+                    <PurpleButton title="See the projects" id="sendButton" href={"/projects"}/>
+                </div>
+            </Dialog>
+        );
+    }
+
+    const [open, setOpen] = React.useState(false);
+
+    console.log(open)
+
+
+    const handleClose = (value) => {
+        setOpen(false);
+    };
 
   return (
     <div>
@@ -20,13 +71,13 @@ export default function Home() {
       </Head>
 
 
-      <Header />
+      <Header accueil={true}/>
       <div className="headTitle">
         <h1 className='mainTitle'>{t('Index1')}</h1>
         <h3>{t('Index2')}</h3>
         <div className="buttonContainer">
           <PurpleButton title={t('Index3')} id="learnMore"/>
-          <WhiteButton title={t('Index4')} id="indexAvailable"/>
+          <WhiteButton title={t('Index4')} id="indexAvailable" href={'/projects'}/>
         </div>
       </div>
 
@@ -80,7 +131,7 @@ export default function Home() {
         </div>
 
 
-        <div className="ecosystemContainer aboutContainer">
+        <div className="ecosystemContainer aboutContainer" id="aboutUs">
             <h5>{t('Index24')}</h5>
             <h4>{t('Index25')}</h4>
             <div className="ecosystemInner">
@@ -126,26 +177,66 @@ export default function Home() {
             </div>
         </div>
 
-        <div className="contactContainer">
+        <div className="contactContainer" id="contact">
             <h4>{t('Index40')}</h4>
             <p>{t('Index41')}</p>
-            <div className="inputFlex">
-                <div className="nameInput contactInput">
-                    <img src={'/profile.png'} alt="" />
-                    <input type="text" placeholder={t('Index45')}/>
-                </div>
-                <div className="emailInput contactInput">
-                    <img src={'/Message.png'} alt="" />
-                    <input type="email" placeholder={t('Index46')}/>
-                </div>
-            </div>
-            <div className="bigInput">
-                <div className="placeholderContainer">
-                    <img src={'/Edit.png'} alt=""/>
-                    <textarea placeholder={t('Index47')}/>
-                </div>
-            </div>
-            <PurpleButton title={t('Index48')} id="sendMessage"/>
+            <Formik
+                initialValues={{
+                    nom: '',
+                    email: '',
+                    message: ''
+                }}
+
+                onSubmit={async (values) => {
+                    setOpen(true)
+                    await axios.post('api/send-email', {
+                        nom: values.nom,
+                        email: values.email,
+                        message: values.message
+                    })
+
+                }}
+
+            >
+
+                {props => (
+                    <div>
+                        <div className="inputFlex">
+                            <div className="nameInput contactInput">
+                                <img src={'/profile.png'} alt="" />
+                                <input
+                                    type="text"
+                                    placeholder={t('Index45')}
+                                    value={props.values.nom}
+                                    onChange={props.handleChange('nom')}
+                                />
+                            </div>
+                            <div className="contactInput">
+                                <img src={'/Message.png'} alt="" />
+                                <input
+                                    type="email"
+                                    placeholder={t('Index46')}
+                                    value={props.values.email}
+                                    onChange={props.handleChange('email')}
+                                />
+                            </div>
+                        </div>
+                        <div className="bigInput">
+                            <div className="placeholderContainer">
+                                <img src={'/Edit.png'} alt=""/>
+                                <textarea
+                                    placeholder={t('Index47')}
+                                    value={props.values.message}
+                                    onChange={props.handleChange('message')}
+                                />
+                            </div>
+                        </div>
+                        <PurpleButton title={t('Index48')} id="sendMessage" onClick={props.handleSubmit} href='javascript:void(0)'/>
+                    </div>
+                )}
+            </Formik>
+            <SimpleDialog open={open} onClose={handleClose} />
+
         </div>
 
         <Footer />

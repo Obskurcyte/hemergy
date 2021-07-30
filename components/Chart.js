@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 
-class LineChart extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        }
-    }
-    render() {
+const LineChart = (props) => {
+    const {value} = props
         const data = {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
             datasets: [
                 {
                     label: "Return on contribution",
@@ -30,11 +25,11 @@ class LineChart extends Component {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: [65, 59, 80, 81, 56, 55, 40, 55, 30, 80]
+                    data: [value, value*1.07, value*(1.07)**2, value*(1.07)**3, value*(1.07)**4, value*(1.07)**5, value*(1.07)**6, value*(1.07)**7, value*(1.07)**8, value*(1.07)**9, value*(1.07)**10, value*(1.07)**11, value*(1.07)**12, value*(1.07)**13, value*(1.07)**14, value*(1.07)**15, value*(1.07)**16, value*(1.07)**17, value*(1.07)**18, value*(1.07)**19]
                 }
             ],
         };
-        var option = {
+        const option = {
             scales: {
                 yAxes: [{
                     ticks: {
@@ -56,10 +51,9 @@ class LineChart extends Component {
         }
         return (
             <React.Fragment>
-                <Line width={600} height={245} data={data} options={option} />
+                <Line width={props.width} height={props.height} data={data} options={option} />
             </React.Fragment>
         );
-    }
 }
 
 export default LineChart;

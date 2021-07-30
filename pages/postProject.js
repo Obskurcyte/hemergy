@@ -41,15 +41,18 @@ const PostProject = () => {
     const [suivant5, setSuivant5] = useState(false);
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0);
+    const [amountNeeded, setAmountNeeded] = useState('')
 
     const initialValues = {
         amount: ''
     }
 
-    const [energies, setEnergies] = useState([])
+    const [energy, setEnergy] = useState('')
 
-    console.log(energies)
 
+    const [error, setError] = useState('');
+    console.log(error)
+    console.log()
     return (
         <div>
             <Head>
@@ -63,8 +66,8 @@ const PostProject = () => {
                 onSubmit={async values => {
                     try {
                         await axios.post('api/postProject', {
-                            energies: energies,
-                            amount: values.amount,
+                            energy: energy,
+                            amount: amountNeeded,
                             title: values.title,
                             consumption: values.consumption,
                             infos: values.infos,
@@ -92,14 +95,23 @@ const PostProject = () => {
                                             <input
                                                 type="text"
                                                 className='inputContribute'
-                                                value={props.values.amount}
-                                                onChange={props.handleChange('amount')}
+                                                onChange={(e) => {
+                                                    props.handleChange('amount')
+                                                    setAmountNeeded(e.target.value)
+                                                }}
                                                 placeholder="100€"/>
                                         </div>
                                         </div>
-                                        <PurpleButton title="Suivant" id="suivantButton" href="javascript:void(0)" onClick={() => {
-                                            setSuivant4(true)
-                                            setSuivant3(false)
+                                        <p style={{color: 'red', textAlign: 'center'}}>{error}</p>
+                                        <PurpleButton title="Suivant" id="suivantButton1" href="javascript:void(0)" onClick={() => {
+                                            if (amountNeeded) {
+                                                setSuivant3(false)
+                                                setSuivant4(true)
+                                                setError(null)
+                                            } else {
+                                                setError('Please Fill this input field')
+                                                setSuivant3(true)
+                                            }
                                         }}/>
                                     </div>
                                 )}
@@ -111,28 +123,28 @@ const PostProject = () => {
                                         <div className='energyContainer'>
                                             <div className={other ? 'energyViolet' : "energy"} onClick={() => {
                                                 setOther(!other)
-                                                setEnergies(energies => [...energies, 'Other'])
+                                                setEnergy('Other')
                                             }}>
                                                 <img src={'/lightning.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Other</p>
                                             </div>
                                             <div className={solar ? 'energyViolet' : "energy"} onClick={() => {
                                                 setSolar(!solar)
-                                                setEnergies(energies => [...energies, 'Solar'])
+                                                setEnergy('Solar')
                                             }}>
                                                 <img src={'/solar.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Solar</p>
                                             </div>
                                             <div className={wind ? 'energyViolet' : "energy"} onClick={() => {
                                                 setWind(!wind)
-                                                setEnergies(energies => [...energies, 'Wind'])
+                                                setEnergy('Wind')
                                             }}>
                                                 <img src={'/wind.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Wind</p>
                                             </div>
                                             <div className={hydro ? 'energyViolet' : "energy"} onClick={() => {
                                                 setHydro(!hydro)
-                                                setEnergies(energies => [...energies, 'Hydro'])
+                                                setEnergy('Hydro')
                                             }}>
                                                 <img src={'/hydro.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Hydro</p>
@@ -142,21 +154,21 @@ const PostProject = () => {
                                         <div className='energyContainer mb-5'>
                                             <div className={biomass ? 'energyViolet' : "energy"} onClick={() => {
                                                 setBiomass(!biomass)
-                                                setEnergies(energies => [...energies, 'Biomass'])
+                                                setEnergy('Biomass')
                                             }}>
                                                 <img src={'/hydro.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Biomass</p>
                                             </div>
                                             <div className={geothermal ? 'energyViolet' : "energy"} onClick={() => {
                                                 setGeothermal(!geothermal)
-                                                setEnergies(energies => [...energies, 'Geothermal'])
+                                                setEnergy('Geothermal')
                                             }}>
                                                 <img src={'/solar.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Geothermal</p>
                                             </div>
                                             <div className={hydrogen ? 'energyViolet' : "energy"} onClick={() => {
                                                 setHydrogen(!hydrogen)
-                                                setEnergies(energies => [...energies, 'Hydrogen'])
+                                                setEnergy('Hydrogen')
                                             }}>
                                                 <img src={'/hydrogen.png'} alt="" className='imageEnergy'/>
                                                 <p className='energyText'>Hydrogen</p>

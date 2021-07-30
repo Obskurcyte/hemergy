@@ -139,7 +139,7 @@ const Signup = () => {
                     <p className='oauthText'>Sign up with Google</p>
                     */}
                     <GoogleLogin
-                        clientId={process.env.GOOGLE_CLIENT_ID}
+                        clientId={'1085629393718-0cmj5len41g2jeb0pjjh65aistr3gjlm.apps.googleusercontent.com'}
                         render={(renderProps) => (
                             <div className="oauthInnerContainer" onClick={renderProps.onClick}>
                                 <img src={'/google.png'} alt=""/>
@@ -151,8 +151,8 @@ const Signup = () => {
                         cookiePolicy="single_host_origin"
                     />
                 <FacebookLogin
-                    appId={process.env.FACEBOOK_CLIENT_ID}
-                    autoLoad={true}
+                    appId={'356594049214338'}
+                    autoLoad
                     render={(renderProps) => (
                         <div className="oauthInnerContainer" onClick={renderProps.onClick}>
                             <img src={'/facebookConnect.png'} alt=""/>

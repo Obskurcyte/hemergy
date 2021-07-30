@@ -10,6 +10,10 @@ const Profile =  () => {
     const initialValues = {
         email: '',
         phone: '',
+        name: '',
+        address: '',
+        currentPassword: '',
+        newPassword: ''
     }
 
     const [dataUser, setDataUser] = useState(null);
@@ -22,7 +26,7 @@ const Profile =  () => {
         }
     }, []);
     console.log(dataUser)
-
+    
     return (
         <div>
             <Header />
@@ -62,8 +66,8 @@ const Profile =  () => {
                                                 type="text"
                                                 placeholder="Your phone number"
                                                 className="inputCheckout mt-1 mb-1 nameInput"
-                                                value={props.values.name}
-                                                onChange={props.handleChange('name')}
+                                                value={props.values.phone}
+                                                onChange={props.handleChange('phone')}
                                             />
                                         </div>
                                     </div>
@@ -77,8 +81,8 @@ const Profile =  () => {
                                                 type="text"
                                                 placeholder={dataUser ? dataUser.email : "Your email"}
                                                 className="inputCheckout mt-1 mb-1 nameInput"
-                                                value={props.values.name}
-                                                onChange={props.handleChange('name')}
+                                                value={props.values.email}
+                                                onChange={props.handleChange('email')}
                                             />
                                         </div>
                                     </div>
@@ -90,8 +94,8 @@ const Profile =  () => {
                                                 type="text"
                                                 placeholder="Your address"
                                                 className="inputCheckout mt-1 mb-1 nameInput"
-                                                value={props.values.name}
-                                                onChange={props.handleChange('name')}
+                                                value={props.values.address}
+                                                onChange={props.handleChange('address')}
                                             />
                                         </div>
                                     </div>
@@ -105,8 +109,8 @@ const Profile =  () => {
                                             type="text"
                                             placeholder="Current password"
                                             className="inputCheckout mt-1 mb-1"
-                                            value={props.values.name}
-                                            onChange={props.handleChange('name')}
+                                            value={props.values.currentPassword}
+                                            onChange={props.handleChange('currentPassword')}
                                         />
                                     </div>
                                     <div className="creditCardInput flex pl-3 pt-2 pb-2 changePassword">
@@ -115,8 +119,8 @@ const Profile =  () => {
                                             type="text"
                                             placeholder="New password"
                                             className="inputCheckout mt-1 mb-1"
-                                            value={props.values.name}
-                                            onChange={props.handleChange('name')}
+                                            value={props.values.newPassword}
+                                            onChange={props.handleChange('newPassword')}
                                         />
                                     </div>
                                 </div>

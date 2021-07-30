@@ -14,6 +14,7 @@
     justify-content: space-around;
 }
 
+
 .innerFooter {
     display: flex;
     width: 60%;
@@ -30,6 +31,7 @@
 
 .colFooter p, .colFooter img{
     margin-top: 3%;
+    cursor: pointer;
 }
 
 .followContainer img{

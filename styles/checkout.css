@@ -3,6 +3,17 @@
     padding-right: 10%;
 }
 
+.contribution-container{
+    width: unset;
+}
+
+.contribution-container p {
+    color: #826F89;
+}
+
+.checkout-graph {
+    width: 90%;
+}
 .stepContainer{
     width: 60%;
 }

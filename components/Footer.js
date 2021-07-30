@@ -14,7 +14,7 @@ const Footer = () => {
             <div className="innerFooter">
                 <div className="colFooter">
                     <Link href="#"><p>{t('Footer1')}</p></Link>
-                    <Link href="#"><p>{t('Footer2')}</p></Link>
+                    <Link href="/privacy-policy"><p>{t('Footer2')}</p></Link>
 
                 </div>
                 <div className="colFooter">

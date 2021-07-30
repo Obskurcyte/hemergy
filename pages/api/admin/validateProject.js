@@ -3,13 +3,13 @@ import {connectToDatabase} from "../../../lib/db";
 async function handler (req, res, next) {
 
     if (req.method === 'POST') {
-        const {energies, amount, title, consumption, infos, projectId, lat, lng, city} = req.body;
+        const {energy, amount, title, consumption, infos, projectId, lat, lng, city} = req.body;
 
         const client = await connectToDatabase();
         const db = client.db();
 
         const createdProject = await db.collection('validatedProjects').insertOne({
-            energies,
+            energy,
             amount,
             title,
             consumption,
@@ -21,8 +21,8 @@ async function handler (req, res, next) {
         });
 
         res.status(201).json({
-            energies: createdProject.ops[0].energies,
-            amount: createdProject.ops[0].energies,
+            energy: createdProject.ops[0].energy,
+            amount: createdProject.ops[0].amount,
             title: createdProject.ops[0].title,
             consumption: createdProject.ops[0].consumption,
             infos: createdProject.ops[0].infos,

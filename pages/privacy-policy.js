@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const Contact = () => {
+const PrivacyPolicy = () => {
     return (
         <div >
             <Header />
@@ -113,4 +113,4 @@ const Contact = () => {
     );
 };
 
-export default Contact;
+export default PrivacyPolicy;

@@ -81,9 +81,24 @@
 
 .energyTypeContainer {
     display: flex;
-    justify-content: space-around;
+    width: 50%;
 }
 
+.imgDetails {
+    margin-right: 5px;
+}
+
+.productionValue {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+}
+
+.productionValue:focus {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+}
 .projectImg {
     width: 100%;
 }
@@ -149,7 +164,7 @@
     display: inline-flex;
     border-radius: 20px;
     padding: 2% 1%;
-    /* width: 0%; */
+    width: 15%;
     font-family: Poppins-Bold, sans-serif;
 }
 
