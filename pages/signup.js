@@ -25,6 +25,7 @@ const Signup = () => {
         name: '',
         password: ''
     }
+
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
@@ -71,9 +72,9 @@ const Signup = () => {
                             email: values.email,
                             password: values.password
                         })
-                        auth.login(response.data.name, response.data.token)
+                        auth.login(response.data.name, response.data.token, response.data.email)
                         await router.push('/started')
-                        console.log(response)
+                        console.log(response.data)
                     } catch (err) {
                         console.log(err)
                     }
@@ -133,11 +134,11 @@ const Signup = () => {
                 <hr/><p style={{marginTop: "1%"}}>Sign up with your profile </p><hr/>
             </div>
 
-            <div className="oauthContainer">
+            {/*   <div className="oauthContainer">
 
                     {/* <img src={'/google.png'} alt=""/>
                     <p className='oauthText'>Sign up with Google</p>
-                    */}
+
                     <GoogleLogin
                         clientId={'1085629393718-0cmj5len41g2jeb0pjjh65aistr3gjlm.apps.googleusercontent.com'}
                         render={(renderProps) => (
@@ -164,6 +165,7 @@ const Signup = () => {
                     callback={responseFacebook} />,
 
             </div>
+            */}
 
             <div className="signUpContainer">
                 <div>

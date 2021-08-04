@@ -11,6 +11,19 @@
     color: #826F89;
 }
 
+.checkoutContainer1 {
+    width: 20vw;
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+.checkoutContainer2 {
+    width: 40%;
+    margin-top: 8%;
+}
+.locationcarre {
+    height: 100%;
+}
 .checkout-graph {
     width: 90%;
 }

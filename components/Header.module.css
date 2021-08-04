@@ -11,6 +11,12 @@
     border: 2px solid #7F6CFC;
 }
 
+.nav-link {
+    cursor: pointer !important;
+}
+.Header_navLinks__Wqkkq  {
+    cursor: pointer !important;
+}
 .buttonText {
     color: #7F6CFC;
     text-align: center;

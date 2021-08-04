@@ -25,7 +25,7 @@ const CardElementContainer = styled.div`
   }
 `;
 
-const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution }) => {
+const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution, id }) => {
     const [isProcessing, setProcessingTo] = useState(false);
     const [checkoutError, setCheckoutError] = useState();
     const [done, setDone] = useState(false);
@@ -52,18 +52,6 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
     const handleCardDetailsChange = ev => {
         ev.error ? setCheckoutError(ev.error.message) : setCheckoutError();
     };
-
-    // Learning
-    // A common ask/bug that users run into is:
-    // How do you change the color of the card element input text?
-    // How do you change the font-size of the card element input text?
-    // How do you change the placeholder color?
-    // The answer to all of the above is to use the `style` option.
-    // It's common to hear users confused why the card element appears impervious
-    // to all their styles. No matter what classes they add to the parent element
-    // nothing within the card element seems to change. The reason for this is that
-    // the card element is housed within an iframe and:
-    // > styles do not cascade from a parent window down into its iframes
 
     const iframeStyles = {
         base: {
@@ -109,9 +97,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
         hidePostalCode: true
     };
 
-    //creation of payment intent
-
-
+    console.log('contrib', contribution)
     console.log(paymentDone)
     return (
         <div>
@@ -122,14 +108,13 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
                     <img src={'/HeartCarre.png'} alt=""/>
                     <h4 className="mt-3 ml-3">Thanks for your contribution !</h4>
                 </div>
-                <PurpleButton title="Go to your wallet" onClick={async () => await router.push('/wallet')} href="/wallet"/>
+                <PurpleButton title="Go to your wallet" onClick={async () => await router.push('/wallet')} href="javascript:void(0)"/>
             </div> : <Formik
                 initialValues={{
                     name: '',
                     cardNumber: ''
                 }}
                 onSubmit={async (values) => {
-
 
                     const cardValues = {
                         card: values.cardNumber,
@@ -154,29 +139,44 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
                             card: cardElement,
                         });
 
-
                         try {
                             const response =  await axios.post('/api/profile/wallet', {
                                 email: dataUser.email,
                                 name: dataUser.name,
-                                contribution: contribution
+                                contribution: 30
                             })
-                            console.log('reponse', response)
+                                console.log('contribuback', contribution)
+                            console.log('response', response)
                             setIsPaymentDone(true)
+                        } catch (err) {
+                            console.log(err)
+                        }
+                        try {
+                            const response = await axios.post('api/projects/update-project', {
+                                id: id,
+                                contribution
+                            })
+                            console.log(response)
+                        } catch (err) {
+                            console.log(err)
+                        }
+
+                        try {
+                            const response = await axios.post('api/projects/add-project-to-user', {
+                                id: id,
+                                name: dataUser.name,
+                            })
+                            console.log(response)
                         } catch (err) {
                             console.log(err)
                         }
 
                         console.log(paymentMethodReq)
-
                         if (paymentMethodReq.error) {
                             setCheckoutError(paymentMethodReq.error.message);
                             setProcessingTo(false);
                             return;
                         }
-
-
-
                         const { error } = await stripe.confirmCardPayment(clientSecret, {
                             payment_method: paymentMethodReq.paymentMethod.id
                         });
@@ -188,7 +188,6 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
                         console.log(err)
                         setCheckoutError(err.message);
                     }
-
                 }}
             >
                 {props => (

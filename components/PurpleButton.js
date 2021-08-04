@@ -3,10 +3,10 @@ import Link from "next/link";
 import styles from './PurpleButton.module.css';
 
 
-const PurpleButton = (props) => {
+const PurpleButton = ({style, id, onClick, href, as, title, ...rest}) => {
     return (
-        <div className={styles.buttonContainer} style={props.style} id={props.id} onClick={props.onClick}>
-            <Link href={`${props.href}`} as={`${props.as}`}><p className={styles.buttonText}>{props.title}</p></Link>
+        <div className={styles.buttonContainer} style={style} id={id} onClick={onClick} {...rest}>
+            <Link href={`${href}`} as={`${as}`}><p className={styles.buttonText}>{title}</p></Link>
         </div>
     );
 };

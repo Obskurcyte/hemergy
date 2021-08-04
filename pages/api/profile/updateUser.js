@@ -1,9 +1,10 @@
 import {connectToDatabase} from "../../../lib/db";
+import {hashPassword} from "../../../lib/auth";
 
 async function handler (req, res) {
 
     if (req.method === 'POST') {
-        const {email, contribution, name} = req.body;
+        const {email, phone, name, adress, newEmail, password} = req.body;
 
         const client = await connectToDatabase();
         const db = client.db();
@@ -12,22 +13,20 @@ async function handler (req, res) {
             email: email
         });
 
-        console.log('existing', existingUser)
-        if (existingUser) {
-            db.collection('users').updateOne({
+        const hashedPassword = await hashPassword(password);
+
+        await db.collection('users').updateOne({
                 email: email
             }, {
                 $set: {
-                    contribution: parseInt(existingUser.contribution) + parseInt(contribution)
+                    email: newEmail,
+                    phone,
+                    name,
+                    adress,
+                    hashedPassword
                 }
             })
-        } else {
-                db.collection('users').insertOne({
-                    email,
-                    name,
-                    contribution
-                })
-        }
+
         res.status(201).json({existingUser})
         client.close()
     }

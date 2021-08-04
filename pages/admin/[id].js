@@ -114,7 +114,7 @@ const ProjectDetail = ({projectsToBeValidated, project}) => {
             <Header />
             <div className="productDetailContainer">
                 <div className="projectDetailTitleContainer">
-                    <div className="goBackContainer">
+                    <div className="goBackContainer" onClick={() => router.push('/admin')}>
                         <img src={'/goBack.png'} alt=""/>
                         <p className="backText">Back</p>
                     </div>

@@ -12,6 +12,7 @@ import {connectToDatabase} from "../../lib/db";
 import {useRouter} from "next/router";
 import LineChart from "../../components/Chart";
 import RedChart from "../../components/RedChart";
+import MapUniqueProject from "../../components/MapUniqueProject";
 
 
 const BorderLinearProgress = withStyles((theme) => ({
@@ -64,7 +65,7 @@ const ProjectDetail = ({project}) => {
     const classes = useStyles();
 
     const router = useRouter()
-    console.log(project)
+    console.log('project', project)
 
     const energy = project.energy
 
@@ -87,9 +88,8 @@ const ProjectDetail = ({project}) => {
     if (energy === 'Geothermal') {
         imgSource = '/iconGeothermal.png'
     }
+
     const [isContribution, setIsContribution] = useState(true)
-
-
 
     const avoidedCarbon = project.consumption * 1000 * 790 * 10**(-6)
     const totalEarnings = value*(1.07)**19;
@@ -97,9 +97,10 @@ const ProjectDetail = ({project}) => {
     const goToCheckout = async () => {
         await router.push({
             pathname: '/checkout',
-            query: {consumption: project.consumption, contribution: value, energy: energy}
+            query: {consumption: project.consumption, contribution: value, energy: energy, city: project.city, id: project._id}
         })
     }
+
     return (
         <div>
             <Header />
@@ -155,18 +156,18 @@ const ProjectDetail = ({project}) => {
                             <div className="contributors2 mb-3">
                                 <div className="numberContributors">
                                     <img src={'/twoUsers.png'} alt=""/>
-                                    <p className="amount ml-3">4 contributors</p>
+                                    <p className="amount ml-3">{project.contributors} contributions</p>
                                 </div>
                                 <div className="amountRaised">
-                                    <p className='amount'>3000€/230000€</p>
+                                    <p className='amount'>{project.contribution} / {project.amount} €</p>
                                 </div>
                             </div>
-                            <BorderLinearProgress variant="determinate" value={50} />
+                            <BorderLinearProgress variant="determinate" value={project.contribution} />
                         </div>
                     </div>
 
                     <div className="productMap">
-                        <Map />
+                        <MapUniqueProject project={project} />
                     </div>
                 </div>
 

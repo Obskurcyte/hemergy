@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Header from "../components/Header";
 import Map from "../components/Map";
 import axios from "axios";
-
+import PurpleButton from "../components/PurpleButton";
+import {useRouter} from "next/router";
 
 const Wallet = ({data}) => {
 
     const [dataUser, setDataUser] = useState(null);
     const [currentUser, setCurrentUser] = useState(null);
 
+    const router = useRouter()
     useEffect(() => {
         if ( process.browser) {
             let userData = localStorage.getItem('userDataHemergy');
@@ -17,8 +19,8 @@ const Wallet = ({data}) => {
         }
     }, []);
 
-
     console.log(dataUser)
+
     useEffect(() => {
         const getUser = async () => {
             if (dataUser) {
@@ -31,8 +33,6 @@ const Wallet = ({data}) => {
         getUser().then(() => console.log('wola'))
     }, [currentUser, dataUser])
 
-
-
     console.log(currentUser)
 
     return (
@@ -40,7 +40,7 @@ const Wallet = ({data}) => {
             <Header />
             <div className="container">
                 <h1 className="mt-4 mb-4">Wallet</h1>
-            {currentUser ?
+            {currentUser?.contribution ?
 
                 <div className="recapAndMapContainer flex justify-content-between">
                     <div className="recapContainer flex-column">
@@ -52,15 +52,15 @@ const Wallet = ({data}) => {
                             </div>
                         </div>
                         <div className="flex justify-content-between mb-2">
-                            <p>Total energy assets value</p>
+                            <p className="grey">Total energy assets value</p>
                             <h5>{currentUser.contribution} €</h5>
                         </div>
                         <div className="flex justify-content-between mb-2">
-                            <p>Total energy sold value</p>
+                            <p className="grey">Total energy sold value</p>
                             <h5>0 €</h5>
                         </div>
                         <div className="flex justify-content-between mb-2">
-                            <p>Available to withdraw</p>
+                            <p className="grey">Available to withdraw</p>
                             <h5>0 €</h5>
                         </div>
                         <h4 className='mt-4 mb-4'>You cumulate :</h4>
@@ -85,14 +85,16 @@ const Wallet = ({data}) => {
                             <img src={'/HeartCarre.png'} alt="" className="imgCarte"/>
                             <h4 className="mt-3 ml-3">Thanks for you contribution</h4>
                         </div>
+                        <PurpleButton title="See available projects" onClick={async () => await router.push('/projects')} style={{width: '100%'}}/>
                     </div>
                     <div className="mapContainer">
                         <Map />
                     </div>
                 </div>
-                : ''}
-
-
+                : <div>
+                    <h5>You have not made a contribution yet !</h5>
+                    <PurpleButton title="See available projects" href={'/projects'}/>
+                </div>}
 
             </div>
         </div>

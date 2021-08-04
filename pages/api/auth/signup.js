@@ -33,9 +33,10 @@ async function handler (req, res) {
         const createdUser = await db.collection('users').insertOne({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            projects: [],
+            contribution: 0
         });
-
         console.log(createdUser)
         let token;
         try {
@@ -48,7 +49,7 @@ async function handler (req, res) {
             console.log(err)
         }
 
-        res.status(201).json({name: createdUser.ops[0].name, token: token})
+        res.status(201).json({name: createdUser.ops[0].name, token: token, email: createdUser.ops[0].email})
         client.close()
 
     }

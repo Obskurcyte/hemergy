@@ -18,8 +18,9 @@ async function handler (req, res, next) {
                 lat,
                 lng,
                 city,
+                contributors: 0,
+                contribution: 0
             });
-
         res.status(201).json({
             energy: createdProject.ops[0].energy,
             amount: createdProject.ops[0].amount,
@@ -28,8 +29,8 @@ async function handler (req, res, next) {
             infos: createdProject.ops[0].infos,
             lat: createdProject.ops[0].lat,
             lng: createdProject.ops[0].lng,
-        })
-
+            contributors: createdProject.ops[0].contributors,
+        });
         client.close()
     }
 

@@ -4,17 +4,10 @@ import Avatar from '@material-ui/core/Avatar';
 import {Formik} from "formik";
 import PurpleButton from "../components/PurpleButton";
 import Footer from "../components/Footer";
+import axios from 'axios';
+import Dialog from "@material-ui/core/Dialog";
 
 const Profile =  () => {
-
-    const initialValues = {
-        email: '',
-        phone: '',
-        name: '',
-        address: '',
-        currentPassword: '',
-        newPassword: ''
-    }
 
     const [dataUser, setDataUser] = useState(null);
 
@@ -26,7 +19,51 @@ const Profile =  () => {
         }
     }, []);
     console.log(dataUser)
-    
+
+    const initialValues = {
+        email: '',
+        phone: '',
+        name: dataUser.name,
+        address: '',
+        currentPassword: '',
+        newPassword: ''
+    }
+
+
+
+    function SimpleDialog(props) {
+        const { onClose, selectedValue, open } = props;
+
+        const handleClose = () => {
+            onClose(selectedValue);
+        };
+
+
+        return (
+            <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+                <div className="dialog-container">
+                    <div className="dialog-img-container">
+                        <img src={'/oksquare.png'} alt=""/>
+                    </div>
+                    <h3 className='messageSent'>Updated !</h3>
+                    <p className="dialog-paragraph">Your profile has been updated</p>
+                    <PurpleButton title="See the projects" id="sendButton" href={"/projects"}/>
+                </div>
+            </Dialog>
+        );
+    }
+
+
+    const [open, setOpen] = React.useState(false);
+
+    console.log(open)
+
+
+    const handleClose = (value) => {
+        setOpen(false);
+    };
+
+
     return (
         <div>
             <Header />
@@ -37,16 +74,22 @@ const Profile =  () => {
                     <h4>Account data</h4>
                     <Formik
                         initialValues={initialValues}
-                        onSubmit={values => {
-                            console.log(values)
+                        onSubmit={async values => {
+                            await axios.post('api/profile/updateUser', {
+                                email: dataUser.email,
+                                phone: values.phone,
+                                name: values.name,
+                                adress: values.adress,
+                                newEmail: values.email,
+                                password: values.newPassword
+                            })
+                            setOpen(true)
                         }}
                     >
-
                         {props => (
                             <div className="profileContainer">
                                 <div className="row">
                                     <div className="col">
-
                                         <div className="creditCardInput flex pl-3 pt-2 pb-2">
                                             <img src={'/Profile.png'} alt="" className='img-checkout img-profile'/>
                                             <input
@@ -125,10 +168,11 @@ const Profile =  () => {
                                     </div>
                                 </div>
 
-                                <PurpleButton title="Save" id="profileSave"/>
+                                <PurpleButton title="Save" id="profileSave" href="javascript:void(0)" onClick={props.handleSubmit}/>
                             </div>
                         )}
                     </Formik>
+                    <SimpleDialog open={open} onClose={handleClose} />
                 </div>
 
 

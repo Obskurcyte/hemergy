@@ -153,7 +153,7 @@ const Index = ({projects}) => {
                     <div className={classes.root}>
                         <div className="productionChoseContainer">
                         <Typography id="input-slider" gutterBottom>
-                            Production
+                            Minimal production
                         </Typography>
                         <p className='productionValue'>{value} MWh/year</p>
                         </div>

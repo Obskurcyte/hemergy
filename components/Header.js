@@ -57,9 +57,7 @@ const Header = (props) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto expandNav">
-                        {props.accueil ?
-                                <ScrollLink activeClass="active" to="aboutUs" spy={true} smooth={true} className='Header_navLinks__Wqkkq nav-link'>{t("NavBar1")}</ScrollLink>
-                         : ''}
+
 
 
                         <Nav.Link href="/projects" className={styles.navLinks} id={styles.nav2}>{t("NavBar2")}</Nav.Link>
@@ -67,7 +65,11 @@ const Header = (props) => {
                         <Nav.Link href="/ecosystem" className={styles.navLinks} id={styles.nav4}>{t("NavBar4")}</Nav.Link>
 
                         {props.accueil ?
-                            <ScrollLink activeClass="active" to="contact" spy={true} smooth={true} className='Header_navLinks__Wqkkq nav-link'>
+                            <ScrollLink activeClass="active" to="aboutUs" spy={true} smooth={true} className='Header_navLinks__Wqkkq nav-link' style={{cursor: 'pointer'}}>{t("NavBar1")}</ScrollLink>
+                            : ''}
+
+                        {props.accueil ?
+                            <ScrollLink activeClass="active" to="contact" spy={true} smooth={true} className='Header_navLinks__Wqkkq nav-link' style={{cursor: 'pointer'}}>
                                 {t("NavBar5")}
                             </ScrollLink> : ''
                         }

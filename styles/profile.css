@@ -14,6 +14,9 @@
     margin-bottom: 1%;
 }
 
+.dropdown-menu {
+    left: -120px !important;
+}
 .Miniblanck {
     height: 100px;
 }
