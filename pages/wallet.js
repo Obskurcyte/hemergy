@@ -4,6 +4,7 @@ import Map from "../components/Map";
 import axios from "axios";
 import PurpleButton from "../components/PurpleButton";
 import {useRouter} from "next/router";
+import WalletMap from "../components/WalletMap";
 
 const Wallet = ({data}) => {
 
@@ -33,8 +34,14 @@ const Wallet = ({data}) => {
         getUser().then(() => console.log('wola'))
     }, [currentUser, dataUser])
 
-    console.log(currentUser)
 
+
+    let userProjects = [];
+    if (currentUser) {
+        userProjects = currentUser.projects
+    }
+
+    console.log(userProjects)
     return (
         <div>
             <Header />
@@ -88,7 +95,7 @@ const Wallet = ({data}) => {
                         <PurpleButton title="See available projects" onClick={async () => await router.push('/projects')} style={{width: '100%'}}/>
                     </div>
                     <div className="mapContainer">
-                        <Map />
+                        <WalletMap projects={userProjects} />
                     </div>
                 </div>
                 : <div>

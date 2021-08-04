@@ -65,6 +65,7 @@ const Index = ({projects}) => {
         }))
     }
 
+    console.log(projects)
     console.log('filter', filteredProjects)
     return (
         <div>
