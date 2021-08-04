@@ -23,7 +23,7 @@ const Profile =  () => {
     const initialValues = {
         email: '',
         phone: '',
-        name: dataUser.name,
+        name: '',
         address: '',
         currentPassword: '',
         newPassword: ''
@@ -72,7 +72,7 @@ const Profile =  () => {
                 <div className="flex-column ml-5">
                     <h1>My Profile</h1>
                     <h4>Account data</h4>
-                    <Formik
+                    {dataUser ? <Formik
                         initialValues={initialValues}
                         onSubmit={async values => {
                             await axios.post('api/profile/updateUser', {
@@ -171,7 +171,8 @@ const Profile =  () => {
                                 <PurpleButton title="Save" id="profileSave" href="javascript:void(0)" onClick={props.handleSubmit}/>
                             </div>
                         )}
-                    </Formik>
+                    </Formik> : ''}
+
                     <SimpleDialog open={open} onClose={handleClose} />
                 </div>
 
