@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../styles/globals.css';
 import '../styles/index.css';
 import '../styles/footer.css';
@@ -32,6 +32,16 @@ function MyApp({ Component, pageProps }) {
     const {token, login, logout, email, username} = useAuth()
     const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
+    useEffect(() => {
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:2505739,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    })
 
   return (
 
@@ -39,6 +49,7 @@ function MyApp({ Component, pageProps }) {
       <React.Fragment>
         <Head>
           <title>Hemergy</title>
+
           <script src="https://unpkg.com/react/umd/react.production.min.js" crossOrigin/>
 
           <script
@@ -48,6 +59,8 @@ function MyApp({ Component, pageProps }) {
           <script
     src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
     crossOrigin/>
+
+
         </Head>
           <AuthContext.Provider value={{
               isLoggedIn: !!token,
