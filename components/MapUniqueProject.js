@@ -42,7 +42,7 @@ const options = {
 const MapUniqueProject = ({project}) => {
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyBFxKEYXYTjQfpAeeqskemVBZSj0L4N6Nc',
+        googleMapsApiKey: `${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`,
         libraries
     });
 

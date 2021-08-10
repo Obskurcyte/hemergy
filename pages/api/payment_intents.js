@@ -1,6 +1,6 @@
 import Stripe from 'stripe'
 
-const stripe = new Stripe ('sk_test_51J4pECI6Kpzdhe1Hkk4CPokZ4ISCbuxO4LYNjAmQRgxM5zQ5FJJZgqXBTAxwIlgYQbeq13QLdLFc2VX07k817jos00Tuiy2LO1', {
+const stripe = new Stripe (`${process.env.NEXT_PUBLIC_STRIPE_PRIVATE_KEY}`, {
   apiVersion: '2020-08-27'
 })
 
