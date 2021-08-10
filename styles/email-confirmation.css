@@ -1,0 +1,33 @@
+.verify-email {
+    text-align: center;
+    font-size: 42px;
+    line-height: 63px;
+    font-weight: bold;
+    margin-top: 3%;
+}
+
+.email-confirmation-text {
+    font-size: 16px;
+    line-height: 160%;
+    color: #826F89;
+    text-align: center;
+}
+
+.resend {
+    font-weight: bold;
+    color: #342497;
+    cursor: pointer;
+}
+
+.username-confirm {
+    font-weight: bold;
+    color: black;
+}
+.img-confirmation-container {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.img-confirmation-container img {
+    width: 100%;
+}

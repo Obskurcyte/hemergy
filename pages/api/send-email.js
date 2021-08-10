@@ -15,6 +15,7 @@ const handler = (req, res) => {
 <p>${message}</p>
 </ul>
 `
+
 try {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',

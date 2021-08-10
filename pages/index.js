@@ -49,7 +49,7 @@ export default function Home() {
                     </div>
                     <h3 className='messageSent'>Message Sent !</h3>
                     <p className="dialog-paragraph">Your message has been successfully sent</p>
-                    <PurpleButton title="See the projects" id="sendButton" href={"/projects"}/>
+                    <PurpleButton title="See the projects" id="sendButton" href={"javascript:void(0)"} onClick={() => router.push('/projects')}/>
                 </div>
             </Dialog>
         );
@@ -88,13 +88,14 @@ export default function Home() {
             <h4>{t('Index6')}</h4>
             <p>{t('Index7')}</p>
         </div>
-
+        
         <div className="video">
             <ReactPlayer
-                url="https://play.maxandlea.com/wp-content/uploads/2020/09/Video2-MAXLEA-FR-SHORT-SHORT-V4-600.mp4"
+                url="https://www.youtube.com/watch?v=Ndu9H4ImNAU&ab_channel=Hemergy"
                 className="video-presentation"
                 playing
-                height="100%"
+                controls={true}
+                height="500px"
                 width="100%"
                 loop
                 playIcon={<img src={'/PhotoVideo2.png'} alt=""/>}

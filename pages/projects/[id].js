@@ -294,4 +294,6 @@ export async function getStaticPaths() {
     }
 }
 
+
+
 export default ProjectDetail;

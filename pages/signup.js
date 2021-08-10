@@ -14,8 +14,6 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 
 const Signup = () => {
 
-
-    const auth = useContext(AuthContext)
     const router = useRouter()
 
     const [checked, setChecked] = React.useState(true);
@@ -61,20 +59,19 @@ const Signup = () => {
             <Formik
                 initialValues={initialValues}
                 onSubmit={async (values) => {
+                    const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    let code = '';
+                    for (let i = 0; i < 25; i++) {
+                        code += characters[Math.floor(Math.random() * characters.length )];
+                    }
+                    localStorage.setItem('confirmationCode', code)
                     try {
-                        console.log(values)
-                        const response = await axios.post('/api/auth/signup', {
-                            headers: {
-                                Accept: 'application/json, text/plain, */*',
-                                'User-Agent': '*',
-                            },
-                            name: values.name,
+                        await axios.post('api/send-confirmation-email', {
                             email: values.email,
+                            name: values.name,
+                            confirmationCode: code,
                             password: values.password
-                        })
-                        auth.login(response.data.name, response.data.token, response.data.email)
-                        await router.push('/started')
-                        console.log(response.data)
+                        }).then(() => router.push('/email-confirmation'))
                     } catch (err) {
                         console.log(err)
                     }

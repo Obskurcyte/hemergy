@@ -12,6 +12,7 @@ import '../styles/wallet.css';
 import '../styles/started.css';
 import '../styles/profile.css';
 import '../styles/contact.css';
+import '../styles/email-confirmation.css';
 import '../i18n';
 import Head from 'next/head';
 import {AuthContext} from "../context/auth";
@@ -21,7 +22,8 @@ import ReduxThunk from 'redux-thunk';
 import {combineReducers, createStore, applyMiddleware} from "redux";
 import authReducer from "../store/reducers/auth";
 import {useAuth} from '../hooks/auth-hook'
-
+import { useRouter } from 'next/router'
+import * as ga from '../lib/ga'
 
 function MyApp({ Component, pageProps }) {
 
@@ -32,16 +34,17 @@ function MyApp({ Component, pageProps }) {
     const {token, login, logout, email, username} = useAuth()
     const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
+    const router = useRouter()
+
     useEffect(() => {
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:2505739,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    })
+        const handleRouteChange = (url) => {
+            ga.pageview(url)
+        }
+        router.events.on('routeChangeComplete', handleRouteChange)
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [router.events])
 
   return (
 
@@ -59,6 +62,7 @@ function MyApp({ Component, pageProps }) {
           <script
     src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
     crossOrigin/>
+
 
 
         </Head>
