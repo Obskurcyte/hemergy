@@ -7,6 +7,11 @@
     width: unset;
 }
 
+
+.contribution-container img  {
+    width: 65px;
+    height: 65px;
+}
 .contribution-container p {
     color: #826F89;
 }
@@ -19,7 +24,7 @@
 
 .checkoutContainer2 {
     width: 40%;
-    margin-top: 8%;
+    margin-top: 4%;
 }
 .locationcarre {
     height: 100%;
@@ -100,6 +105,10 @@
     max-width: 70%;
 }
 
+.contribution-container p {
+    width: 200px;
+}
+
 .inputCheckout {
     border:none;
     background-image:none;
@@ -128,4 +137,50 @@
 
 #back-button {
     width: 45%;
+}
+
+@media screen and (max-width: 1200px){
+    .your-contribution-container {
+        width: 100%;
+    }
+    .stepContainer {
+        width: 100%;
+    }
+    .yourContribution {
+        width: 33%;
+    }
+    .contribution-container {
+        width: 33%;
+    }
+    .locationCheckoutContainer {
+        width: 33%;
+    }
+    .checkoutContainer2 {
+        width: 33%;
+        margin-top: 3%;
+        margin-left: 7%;
+    }
+}
+
+@media screen and (max-width: 850px){
+    .locationCheckoutContainer {
+        margin-top: 2%;
+    }
+    .contribution-container img {
+        width: 40px;
+        height: 40px;
+    }
+    .your-contribution-container {
+        flex-direction: column;
+    }
+    .checkoutContainer1 {
+        margin-left: 0;
+    }
+    .checkoutContainer2 {
+        margin-top: 5%;
+        margin-left: 3%;
+    }
+    .checkoutForm {
+        max-width: 100%;
+    }
 }

@@ -37,6 +37,10 @@
     padding: 2% 5%;
 }
 
+.imgDetails {
+    width: 47px;
+    height: 47px;
+}
 .graphContainer {
     width: 45%;
     align-items: center;
@@ -232,14 +236,43 @@
     }
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 600px){
     .productMap {
         height: 400px;
+    }
+    .backText {
+        display: none;
+    }
+    .imgDetails {
+        width: 40px;
+        height: 40px;
     }
     .projectDetailTitleContainer {
         width: 70%;
     }
     .projectDetailTitleContainer h1 {
         font-size: 1.5rem;
+    }
+    .lowTitle {
+        font-size: 14px;
+    }
+    .description p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .lowTitle {
+        font-size: 12px;
+    }
+    .description p {
+        font-size: 14px;
+    }
+    .returnContribText, .notreturnContribText {
+        font-size: 10px;
+    }
+    .energyTypeContainer img {
+        width: 40px;
+        height: 40px;
     }
 }

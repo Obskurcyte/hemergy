@@ -81,8 +81,8 @@ const Header = (props) => {
                         </NavDropdown>
                         {
                             userData && (
-                                <Nav.Link className='ml-auto join flex justify-content-between'>
-                                    <div className="flex justify-content-around">
+                                <Nav.Link className='join flex justify-content-between profile-link'>
+                                    <div className="flex justify-content-around profile-header-container">
                                         <Avatar>{initial}</Avatar>
 
                                         <NavDropdown title="" id="basic-nav-dropdown" className={styles.navLinks}>

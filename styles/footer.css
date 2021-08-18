@@ -50,6 +50,7 @@
 @media screen and (max-width: 1000px){
     .innerFooter {
         flex-direction: column;
+        width: 25%;
     }
 }
 
@@ -79,3 +80,34 @@
         margin-bottom: 15% !important;
     }
 }
+
+@media screen and (max-width: 600px){
+    .inputFlex {
+        flex-direction: column;
+    }
+    .contactInput {
+        width: 100%;
+        margin-top: 3%;
+        padding-left: 10px;
+    }
+    .contactInput img {
+        width: 20px;
+        height: 20px;
+        margin-top: 5px;
+    }
+    .placeholderContainer img {
+        width: 20px;
+        height: 20px;
+    }
+    .placeholderContainer {
+        padding-left: 7px;
+    }
+    .contactContainer h4 {
+        font-size: 26px;
+    }
+    .contactContainer p {
+        font-size: 14px;
+        width: unset;
+    }
+}
+

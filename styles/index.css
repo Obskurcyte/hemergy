@@ -10,6 +10,10 @@
     line-height: 160%;
     color: #826F89
 }
+
+.contactInput img {
+    width: 5%;
+}
 .join{
     width: 30% !important;
 }
@@ -288,6 +292,9 @@
     width: 95%;
 }
 
+#StartJourney2 {
+    display: none;
+}
 .contactContainer input:focus {
     outline: none;
 }
@@ -424,6 +431,12 @@
     .buttonContainer {
         width: 100%;
     }
+    .profile-link {
+        margin-left: 0!important;
+    }
+    .profile-header-container {
+        width: 30%;
+    }
     .headTitle {
         max-width: 80%;
     }
@@ -433,6 +446,7 @@
     .headTitle h3 {
         font-size: 1.3rem;
     }
+
     .headTitle {
         max-width: 90%;
     }
@@ -464,4 +478,149 @@
         width: 100%;
         margin: 2%;
     }
+}
+
+@media screen and (max-width: 600px){
+    .headTitle h3 {
+        font-size: 14px;
+        line-height: 160%;
+        text-align: justify;
+        margin-bottom: 30px;
+    }
+    .mainTitle {
+        font-size: 40px;
+    }
+    #learnMore, #indexAvailable {
+        width: 318px;
+        height: 50px;
+    }
+    #learnMore p, #indexAvailable p {
+        margin-top: 3px;
+    }
+    .howItWorks h5 {
+        font-size: 12px;
+        text-align: justify;
+    }
+    .howItWorks {
+        padding: 10px;
+    }
+    .howItWorks h4 {
+        font-size: 26px;
+        text-align: left;
+        max-width: unset;
+        margin: 0!important;
+    }
+    .howItWorks p {
+        font-size: 14px;
+        color: #826F89;
+        text-align: left;
+        max-width: unset;
+    }
+    .video {
+        width: 320px;
+        height: 200px;
+    }
+    .video-presentation {
+        height: 100% !important;
+    }
+    .video img {
+        height: 100%;
+    }
+    .contributorsContainer {
+        margin-top: 100px;
+        padding: 10px;
+    }
+    .contributorMini {
+        width: unset;
+    }
+    .contributorMini h5 {
+        font-size: 12px;
+        text-align: left;
+    }
+    .contributorMini h4 {
+        font-size: 26px;
+    }
+    #StartJourney1 {
+        display: none;
+    }
+    #StartJourney2 {
+        width: 319px;
+        display: block;
+        height: 50px;
+        margin: 8% auto;
+    }
+    #StartJourney2 p{
+        margin-top: 3px;
+        font-size: 16px;
+    }
+    .contributorMini p {
+        font-size: 14px;
+    }
+    .contributorMini2 p {
+        font-size: 14px;
+    }
+    .contributorMini2 h5 {
+        font-size: 12px;
+    }
+    .contributorMini2 h4 {
+        font-size: 26px;
+    }
+    .ecosystemContainer h5 {
+        font-size: 12px;
+        text-align: left;
+    }
+    .ecosystemContainer {
+        padding: 10px;
+    }
+    .ecosystemContainer h4 {
+        font-size: 26px;
+        text-align: left;
+    }
+    .ecosystemInner {
+        flex-direction: column-reverse;
+    }
+    .ecosystemMini h3 {
+        font-size: 20px;
+    }
+    .ecosystemMini p {
+        font-size: 14px;
+    }
+    .ecosystemInner2 {
+        flex-direction: column;
+    }
+    .ecosystemMini2 h3 {
+        font-size: 20px;
+    }
+    .ecosystemMini2 p {
+        font-size: 14px;
+    }
+    #apiButton {
+        width: 320px;
+        height: 50px;
+    }
+    #apiButton p {
+        margin-top: 5px;
+    }
+    .reasonContainer {
+        margin-top: 100px;
+    }
+    .reasonContainer h5 {
+        font-size: 12px;
+        text-align: left;
+    }
+    .reasonContainer h4 {
+        font-size: 26px;
+        text-align: left;
+    }
+    .reasonContainer h4 {
+        font-size: 20px;
+    }
+    .whyContainer p {
+        font-size: 12px;
+        color: #826F89;
+    }
+}
+
+@media screen and (max-width: 450px){
+
 }

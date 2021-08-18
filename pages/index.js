@@ -70,7 +70,6 @@ export default function Home() {
         <title>Hemergy - Index</title>
       </Head>
 
-
       <Header accueil={true}/>
       <div className="headTitle">
         <h1 className='mainTitle'>{t('Index1')}</h1>
@@ -112,12 +111,15 @@ export default function Home() {
                         <p>{t('Index10')}
                             <br/>{t('Index11')}</p>
                     </div>
-                    <PurpleButton title={t('Index42')}/>
+                    <PurpleButton title={t('Index42')} id="StartJourney1"/>
                 </div>
                 <img src={"/photoEolienne.png"} alt=""/>
+                <PurpleButton title={t('Index42')} id="StartJourney2"/>
             </div>
 
             <div className="contributorInner2">
+                <PurpleButton title={t('Index42')} id="StartJourney2"/>
+
                 <img src={"/panneauSolaire.png"} alt="" className='imgEolienne'/>
                 <div className="innerEolienneContainer">
                     <div className="contributorMini2">
@@ -126,7 +128,7 @@ export default function Home() {
                         <p>{t('Index14')}
                             <br/>{t('Index15')}</p>
                     </div>
-                    <PurpleButton title={t('Index42')}/>
+                    <PurpleButton title={t('Index42')} id="StartJourney1"/>
                 </div>
             </div>
         </div>

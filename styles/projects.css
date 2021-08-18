@@ -18,6 +18,9 @@
     margin: 3% auto;
 }
 
+.projectCardContainer {
+    overflow: hidden;
+}
 .projectsAdminListContainer {
     width: 100%;
 }
@@ -158,6 +161,12 @@
     .sortBy {
         width: 30%;
     }
+    .foundProjects {
+        width: 100%;
+        text-align: center;
+        font-size: 26px;
+        font-family: Poppins-SemiBold, sans-serif;
+    }
 }
 
 @media screen and (max-width: 750px){
@@ -166,7 +175,7 @@
     }
 }
 
-@media screen and (max-width: 570px){
+@media screen and (max-width: 600px){
     .sortBy {
         width: 50%;
     }
@@ -175,6 +184,18 @@
     }
     .panneauImg {
         height: 300px;
+    }
+    .energyAndProductionChose {
+        flex-direction: column;
+    }
+    .energyChose {
+        width: 90%;
+        margin-left: 3%;
+    }
+    .productionChose {
+        width: 90%;
+        margin-left: 3%;
+        margin-top: 5%;
     }
 
 }

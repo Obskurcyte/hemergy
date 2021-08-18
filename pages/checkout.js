@@ -83,7 +83,7 @@ const Checkout = (props) => {
             <div className="checkoutContainer">
                 <div className="stepContainer mb-5">
                     <h3 className="checkoutInnerTitle mb-3">Your contribution</h3>
-                    <div className="flex">
+                    <div className="flex your-contribution-container">
                         <div className="yourContribution flex-column justify-content-between">
                             <p className="bold mb-3">Your contribution</p>
                             <div className="energyTypeContainer contribution-container">
@@ -94,8 +94,7 @@ const Checkout = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-content-between">
-                            <div className="flex">
+                            <div className="flex locationCheckoutContainer">
                                 <div className="energyTypeContainer contribution-container checkoutContainer1">
                                     <img src={'/locationcarre.png'} alt="" className="locationcarre"/>
                                     <div className="description">
@@ -114,7 +113,6 @@ const Checkout = (props) => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
                 </div>
