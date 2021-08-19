@@ -75,6 +75,7 @@ const Checkout = (props) => {
         imgSource = '/iconGeothermal.png'
     }
 
+    const [isContribution, setIsContribution] = useState(true)
 
      return (
         <div>
@@ -105,7 +106,7 @@ const Checkout = (props) => {
                             </div>
 
                             <div className="energyType checkoutContainer2">
-                                <p>Energy Type</p>
+                                <p className="energyTypeTextCheckout">Energy Type</p>
                                 <div className="flex">
                                     <div className="energyMiniContainer flex">
                                         <img src={imgSource} alt=""/>
@@ -143,11 +144,26 @@ const Checkout = (props) => {
                             </div>
                     </div>
 
-                        <div className="stepContainer2 mb-5 mt-5">
+                        <div className="stepContainer2 mb-5 mt-5 graphicsContainer">
                             <h3 className="checkoutInnerTitle mb-3">Graphics of distribution in time</h3>
                             <div className="flex justify-content-between checkout-graph">
                                 <LineChart value={contribution}/>
                                 <RedChart value={consumption}/>
+                            </div>
+                        </div>
+
+                        <div className="graphContainer mobileDisplay">
+                            <div className="graphChoice flex">
+                                <div className={isContribution ? "returnContrib": "notreturnContrib"} onClick={() => setIsContribution(!isContribution)}>
+                                    <p className={isContribution ? "returnContribText": "notreturnContribText"}>Return on contribution</p>
+                                </div>
+                                <div className={isContribution ? "notreturnContrib": "returnContrib"} onClick={() => setIsContribution(!isContribution)}>
+                                    <p className={isContribution ? "notreturnContribText": "returnContribText"}>Reduced carbon</p>
+                                </div>
+                            </div>
+
+                            <div className="graph">
+                                {isContribution ? <LineChart height={245} width={600} value={avoidedCarbon}/> : <RedChart height={245} width={600} value={totalEarnings}/>}
                             </div>
                         </div>
 

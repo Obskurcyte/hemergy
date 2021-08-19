@@ -118,6 +118,7 @@ const PostProject = () => {
 
 
                                 {suivant4 && (
+                                    <div>
                                     <div className="energyNeeded">
                                         <h5 className='amountNeededText energyText text-center'>Choose energy type</h5>
                                         <div className='energyContainer'>
@@ -186,7 +187,94 @@ const PostProject = () => {
                                         </div>
 
                                     </div>
+
+                                    <div className="energyNeededPhone">
+                                    <h5 className='amountNeededText energyText text-center'>Choose energy type</h5>
+                                    <div className='energyContainer2'>
+                                        <div className={other ? 'energyViolet' : "energy"} onClick={() => {
+                                        setOther(!other)
+                                        setEnergy('Other')
+                                    }}>
+                                        <img src={'/lightning.png'} alt="" className='imageEnergy'/>
+                                        <p className='energyText'>Other</p>
+                                        </div>
+
+                                        <div
+                                            className={solar ? 'energyViolet' : "energy"}
+                                            onClick={() => {
+                                                setSolar(!solar)
+                                                setEnergy('Solar')
+                                            }}
+                                        >
+                                            <img src={'/solar.png'} alt="" className='imageEnergy'/>
+                                            <p className='energyText'>Solar</p>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div className='energyContainer2'>
+                                        <div className={wind ? 'energyViolet' : "energy"} onClick={() => {
+                                            setWind(!wind)
+                                            setEnergy('Wind')
+                                        }}>
+                                            <img src={'/wind.png'} alt="" className='imageEnergy'/>
+                                            <p className='energyText'>Wind</p>
+                                        </div>
+
+                                        <div className={hydro ? 'energyViolet' : "energy"} onClick={() => {
+                                            setHydro(!hydro)
+                                            setEnergy('Hydro')
+                                        }}>
+                                            <img src={'/hydro.png'} alt="" className='imageEnergy'/>
+                                            <p className='energyText'>Hydro</p>
+                                        </div>
+
+
+                                    </div>
+
+
+                                        <div className="energyContainer">
+
+                                            <div className={geothermal ? 'energyViolet' : "energy"} onClick={() => {
+                                                setGeothermal(!geothermal)
+                                                setEnergy('Geothermal')
+                                            }}>
+                                                <img src={'/solar.png'} alt="" className='imageEnergy'/>
+                                                <p className='energyText'>Geothermal</p>
+                                            </div>
+
+                                            <div className={biomass ? 'energyViolet' : "energy"} onClick={() => {
+                                                setBiomass(!biomass)
+                                                setEnergy('Biomass')
+                                            }}>
+                                                <img src={'/hydro.png'} alt="" className='imageEnergy'/>
+                                                <p className='energyText'>Biomass</p>
+                                            </div>
+                                    <div className={hydrogen ? 'energyViolet' : "energy"} onClick={() => {
+                                    setHydrogen(!hydrogen)
+                                    setEnergy('Hydrogen')
+                                }}>
+                                    <img src={'/hydrogen.png'} alt="" className='imageEnergy'/>
+                                    <p className='energyText'>Hydrogen</p>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div className="flex suivantContainerPost justify-content-between">
+                                    <PurpleButton title="Précedent"  href="javascript:void(0)" onClick={() => {
+                                    setSuivant3(true)
+                                    setSuivant4(false)
+                                }}/>
+                                    <PurpleButton title="Suivant" id="suivantButton" href="javascript:void(0)" onClick={() => {
+                                    setSuivant(true)
+                                    setSuivant4(false)
+                                }}/>
+                                    </div>
+
+                                    </div>
                                 )}
+
 
 
                             {suivant && (

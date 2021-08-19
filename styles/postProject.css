@@ -126,11 +126,19 @@
     width: 50%;
 }
 
+.imgContainerThankYou img {
+    width: 100%;
+}
 .placeholderContainer2 input{
     outline: none;
     border: none;
     width: 90%;
 }
+
+.energyNeededPhone {
+    display: none;
+}
+
 
 .imgPlaceholder {
     width: 2% !important;
@@ -181,4 +189,58 @@
 #postProjectButton {
     width: 50%;
     margin: 5% auto;
+}
+
+
+@media screen and (max-width: 600px){
+    .headTitleLog {
+        font-size: 26px;
+    }
+    .amountNeeded {
+        margin-left: 20%;
+    }
+    #suivantButton1 {
+        width: 320px;
+        height: 50px;
+        margin: 0 auto;
+    }
+    #suivantButton1 p{
+        margin-top: 4px;
+    }
+    .amountNeededText {
+        font-size: 16px;
+    }
+    .inputAmount {
+        width: 120px;
+        height: 40px;
+        border-radius: 10px;
+    }
+    .energyNeeded {
+        display: none;
+    }
+    .energyNeededPhone {
+        display: block;
+    }
+    .energyContainer2 {
+        display: flex;
+        justify-content: space-around;
+    }
+    .imgPlaceholder {
+        width: 18.5px!important;
+        height: 18.5px!important;
+    }
+    #availableProjects {
+        width: 320px;
+        height: 50px;
+    }
+    #availableProjects p{
+       margin-top: 5px;
+    }
+    .imgContainerThankYou {
+        width: 100%;
+    }
+    .comebacksoon {
+        font-size: 14px;
+        color: #826F89;
+    }
 }

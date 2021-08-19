@@ -118,6 +118,9 @@
     box-shadow: none;
 }
 
+.mobileDisplay {
+    display: none;
+}
 .inputCheckout:focus {
     outline: none;
 }
@@ -182,5 +185,31 @@
     }
     .checkoutForm {
         max-width: 100%;
+    }
+    .graphicsContainer {
+        display: none;
+    }
+    .mobileDisplay {
+        display: block;
+    }
+    .stepContainer2 {
+        width: 100%;
+    }
+    .yourEstimatedResults {
+        width: 100%;
+    }
+    .graphContainerMobile {
+        width: 100%;
+        margin: 5% auto;
+    }
+    .energyTypeTextCheckout {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .checkoutContainer {
+        padding-left: 2%;
+        padding-right: 2%;
     }
 }
