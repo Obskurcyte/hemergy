@@ -18,11 +18,11 @@ const handler = async (req, res) => {
 
 try {
     let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: 'smtp.centrale-marseille.fr',
         port: 465,
         secure: true, // use SSL
         auth: {
-            user: 'dev.hemergy@gmail.com', // generated ethereal user
+            user: 'hadrien.jaubert@centrale-marseille.fr', // generated ethereal user
             pass: 'Hello13012'
         },
     });
@@ -43,7 +43,7 @@ try {
     await new Promise((resolve, reject) => {
         // send mail with defined transport object
         transporter.sendMail({
-            from: "contact@maxandlea.com", // sender address
+            from: "dev.hemergy@gmail.com", // sender address
             to: "hadrien.jaubert99@gmail.com",  // list of receivers
             subject: "Nouvelle demande de contact",
             text: "Hello world?", // plain text body
