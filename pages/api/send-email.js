@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import {useRouter} from "next/router";
 
 
-const handler = (req, res) => {
+const handler = async (req, res) => {
     const {nom, email, message} = req.body
     if (req.method === 'POST') {
         const output = `
@@ -27,8 +27,34 @@ try {
         },
     });
 
+    await new Promise((resolve, reject) => {
+        // verify connection configuration
+        transporter.verify(function (error, success) {
+            if (error) {
+                console.log(error);
+                reject(error);
+            } else {
+                console.log("Server is ready to take our messages");
+                resolve(success);
+            }
+        });
+    });
+
+    await new Promise((resolve, reject) => {
+        // send mail with defined transport object
+        transporter.sendMail({
+            from: "contact@maxandlea.com", // sender address
+            to: "hadrien.jaubert99@gmail.com",  // list of receivers
+            subject: "Nouvelle demande de contact",
+            text: "Hello world?", // plain text body
+            html: output, // html body,
+        });
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    res.status(200).json({status: "OK"})
     // send mail with defined transport object
-    let info = transporter.sendMail({
+  /*  let info = transporter.sendMail({
         from: `${req.body.email}`, // sender address
         to: "hadrien.jaubert99@gmail.com",  // list of receivers
         subject: "[Nouvelle demande de contact]", // Subject line
@@ -37,9 +63,11 @@ try {
     });
 
 
+   */
 
-    console.log("Message sent: %s", info.messageId);
-    res.json({okay: 'okay'})
+
+
+
 } catch(err) {
             console.log(err)
 }

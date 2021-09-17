@@ -193,13 +193,15 @@ export default function Home() {
                 onSubmit={async (values) => {
 
                     try {
-                        await axios.post('api/send-email', {
+
+                        setOpen(true)
+                        const response = await axios.post('api/send-email', {
                             nom: values.nom,
                             email: values.email,
                             message: values.message
-
                     })
-                        setOpen(true)
+                        console.log(response)
+
                     } catch (err) {
                         console.log(err)
                     }
