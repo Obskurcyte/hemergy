@@ -11,6 +11,7 @@ import {useTranslation} from "react-i18next";
 import {Formik} from "formik";
 import axios from 'axios';
 import {useRouter} from "next/router";
+import emailjs from 'emailjs-com'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -63,6 +64,20 @@ export default function Home() {
     const handleClose = (value) => {
         setOpen(false);
     };
+
+    function sendEmail(e) {
+        e.preventDefault()
+
+        emailjs.sendForm('gmail', 'template_o2aags2', e.target,
+            'user_YRLxcMnD5tkgH03pWVdt3')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+        e.target.reset()
+        setOpen(true)
+    }
 
   return (
     <div>
@@ -183,52 +198,22 @@ export default function Home() {
         <div className="contactContainer" id="contact">
             <h4>{t('Index40')}</h4>
             <p>{t('Index41')}</p>
-            <Formik
-                initialValues={{
-                    nom: '',
-                    email: '',
-                    message: ''
-                }}
-
-                onSubmit={async (values) => {
-
-                    try {
-
-                        setOpen(true)
-                        const response = await axios.post('api/send-email', {
-                            nom: values.nom,
-                            email: values.email,
-                            message: values.message
-                    })
-                        console.log(response)
-
-                    } catch (err) {
-                        console.log(err)
-                    }
-
-                }}
-
-            >
-
-                {props => (
-                    <div>
+                    <form onSubmit={sendEmail}>
                         <div className="inputFlex">
                             <div className="nameInput contactInput">
                                 <img src={'/profile.png'} alt="" />
                                 <input
                                     type="text"
+                                    name="name"
                                     placeholder={t('Index45')}
-                                    value={props.values.nom}
-                                    onChange={props.handleChange('nom')}
                                 />
                             </div>
                             <div className="contactInput">
                                 <img src={'/Message.png'} alt="" />
                                 <input
                                     type="email"
+                                    name="email"
                                     placeholder={t('Index46')}
-                                    value={props.values.email}
-                                    onChange={props.handleChange('email')}
                                 />
                             </div>
                         </div>
@@ -237,15 +222,14 @@ export default function Home() {
                                 <img src={'/Edit.png'} alt=""/>
                                 <textarea
                                     placeholder={t('Index47')}
-                                    value={props.values.message}
-                                    onChange={props.handleChange('message')}
+                                    name="message"
                                 />
                             </div>
                         </div>
-                        <PurpleButton title={t('Index48')} id="sendMessage" onClick={props.handleSubmit} href='javascript:void(0)'/>
-                    </div>
-                )}
-            </Formik>
+
+                        <input type="submit" value="Send" />
+                        <PurpleButton title={t('Index48')} id="sendMessage" href='javascript:void(0)'/>
+                    </form>
             <SimpleDialog open={open} onClose={handleClose} />
 
         </div>

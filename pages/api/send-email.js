@@ -18,11 +18,11 @@ const handler = async (req, res) => {
 
 try {
     let transporter = nodemailer.createTransport({
-        host: 'smtp.centrale-marseille.fr',
+        host: 'smtp.gmail.com',
         port: 465,
         secure: true, // use SSL
         auth: {
-            user: 'hadrien.jaubert@centrale-marseille.fr', // generated ethereal user
+            user: 'dev.hemergy@gmail.com', // generated ethereal user
             pass: 'Hello13012'
         },
     });
