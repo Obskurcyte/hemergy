@@ -39,6 +39,7 @@ try {
 
 
     console.log("Message sent: %s", info.messageId);
+    res.json({okay: 'okay'})
 } catch(err) {
             console.log(err)
 }
