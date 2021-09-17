@@ -43,7 +43,7 @@ try {
     await new Promise((resolve, reject) => {
         // send mail with defined transport object
         transporter.sendMail({
-            from: "dev.hemergy@gmail.com", // sender address
+            from: "contact@maxandlea.com", // sender address
             to: "hadrien.jaubert99@gmail.com",  // list of receivers
             subject: "Nouvelle demande de contact",
             text: "Hello world?", // plain text body
