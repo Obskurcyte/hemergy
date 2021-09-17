@@ -305,6 +305,14 @@
     color: #AE9ABA;
 }
 
+.sendButton {
+    color: white;
+    font-family: Poppins-Regular, sans-serif;
+    border-radius: 10px!important;
+    padding: 2% 5%;
+    width: 40%;
+    cursor: pointer;
+}
 .dialog-container {
     padding: 8%;
     align-items: center;

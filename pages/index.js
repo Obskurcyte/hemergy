@@ -227,8 +227,7 @@ export default function Home() {
                             </div>
                         </div>
 
-                        <input type="submit" value="Send" />
-                        <PurpleButton title={t('Index48')} id="sendMessage" href='javascript:void(0)'/>
+                        <input type="submit" value="Send Message" id="sendMessage" className="sendButton"/>
                     </form>
             <SimpleDialog open={open} onClose={handleClose} />
 
