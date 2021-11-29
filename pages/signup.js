@@ -66,7 +66,7 @@ const Signup = () => {
                     }
                     localStorage.setItem('confirmationCode', code)
                     try {
-                        await axios.post('api/signup', {
+                        await axios.post('api/auth/signup', {
                             email: values.email,
                             name: values.name,
                             password: values.password

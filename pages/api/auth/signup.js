@@ -8,7 +8,6 @@ async function handler (req, res) {
     if (req.method === 'POST') {
         const {name, email, password} = req.body;
 
-
         console.log(req.body)
         if (!email || !email.includes('@') || !name || !password || password.trim().length < 7) {
             res
