@@ -291,7 +291,6 @@ export async function getServerSideProps() {
         .find()
         .toArray()
 
-
     return {
         props: {
             projects: JSON.parse(JSON.stringify(projects)),

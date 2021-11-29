@@ -18,7 +18,7 @@ const handler = async (req, res) => {
         const db = client.db();
 
 
-        const createdUser = await db.collection('userspending').insertOne({
+        const createdUser = await db.collection('users').insertOne({
             name,
             email,
             password: password,
