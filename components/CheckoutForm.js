@@ -42,7 +42,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
             setDataUser(trueData)
         }
     }, []);
-    console.log(dataUser)
+    console.log('dataUser', dataUser)
 
     const [paymentDone, setIsPaymentDone] = useState(false);
     // TIP
