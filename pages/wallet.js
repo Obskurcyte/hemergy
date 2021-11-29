@@ -56,12 +56,12 @@ const Wallet = ({data}) => {
                             <h4>Balance</h4>
                             <div className='flex'>
                                 <img src={'/creditCard.png'} alt="" className="imgCarte"/>
-                                <h4 className="ml-1">{currentUser?.contribution} €</h4>
+                                <h4 className="ml-1">13500 €</h4>
                             </div>
                         </div>
                         <div className="flex justify-content-between mb-2">
                             <p className="grey">Total energy assets value</p>
-                            <h5>{currentUser?.contribution} €</h5>
+                            <h5>13500 €</h5>
                         </div>
                         <div className="flex justify-content-between mb-2">
                             <p className="grey">Total energy sold value</p>
