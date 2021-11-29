@@ -45,7 +45,6 @@ const Index = ({projectsToBeValidated}) => {
     );
 };
 
-
 export async function getServerSideProps() {
     const client = await connectToDatabase();
     const db = client.db();

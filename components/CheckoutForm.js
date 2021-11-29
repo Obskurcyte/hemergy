@@ -130,7 +130,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
                     const cardElement = elements.getElement("cardNumber");
 
                     try {
-                        const { data: clientSecret } = await axios.post("/api/payment_intents", {
+                        const { data: clientSecret } = await axios.post("api/payment_intents", {
                             amount: price * 100
                         });
 
@@ -140,7 +140,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
                         });
 
                         try {
-                            const response =  await axios.post('/api/profile/wallet', {
+                            const response =  await axios.post('api/profile/wallet', {
                                 email: dataUser.email,
                                 name: dataUser.name,
                                 contribution: 30
