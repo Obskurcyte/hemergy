@@ -101,7 +101,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
     console.log(paymentDone)
     return (
         <div>
-        {paymentDone ?
+        {!paymentDone ?
             <div className="stepContainer2 mb-5 mt-5">
                 <h3 className="purpleTitle mb-3">Done !</h3>
                 <div className="flex mb-4">

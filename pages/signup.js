@@ -64,7 +64,9 @@ const Signup = () => {
                     for (let i = 0; i < 25; i++) {
                         code += characters[Math.floor(Math.random() * characters.length )];
                     }
-                    localStorage.setItem('confirmationCode', code)
+                    localStorage.setItem('userDataHemergy',
+                        JSON.stringify({name: values.name, email: values.email})
+                    )
                     try {
                         await axios.post('api/auth/signup', {
                             email: values.email,

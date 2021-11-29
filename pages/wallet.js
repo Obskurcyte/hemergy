@@ -20,7 +20,7 @@ const Wallet = ({data}) => {
         }
     }, []);
 
-    console.log(dataUser)
+    console.log(dataUser);
 
     useEffect(() => {
         const getUser = async () => {
@@ -41,13 +41,14 @@ const Wallet = ({data}) => {
         userProjects = currentUser.projects
     }
 
+
     console.log(userProjects)
     return (
         <div>
             <Header />
             <div className="container">
                 <h1 className="mt-4 mb-4">Wallet</h1>
-            {currentUser?.contribution ?
+            {!currentUser?.contribution ?
 
                 <div className="recapAndMapContainer flex justify-content-between">
                     <div className="recapContainer flex-column">
