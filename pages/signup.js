@@ -66,10 +66,9 @@ const Signup = () => {
                     }
                     localStorage.setItem('confirmationCode', code)
                     try {
-                        await axios.post('api/send-confirmation-email', {
+                        await axios.post('api/signup', {
                             email: values.email,
                             name: values.name,
-                            confirmationCode: code,
                             password: values.password
                         }).then(() => router.push('/email-confirmation'))
                     } catch (err) {

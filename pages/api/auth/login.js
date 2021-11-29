@@ -8,7 +8,6 @@ async function handler (req, res, next) {
         const {email, password} = req.body;
 
 
-
         const client = await connectToDatabase();
         const db = client.db();
 
