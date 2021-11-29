@@ -141,7 +141,6 @@ const CheckoutForm = ({ price, onSuccessfulCheckout, isPaymentDone, contribution
 
                         try {
                             const response =  await axios.post('api/profile/wallet', {
-                                email: dataUser.email,
                                 name: dataUser.name,
                                 contribution: 30
                             })
